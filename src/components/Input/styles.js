@@ -7,6 +7,19 @@ export const FieldSection = styled.div`
   position: relative;
   overflow: hidden;
   margin-bottom: 5px;
+
+  button > svg {
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+    width: 16px;
+    height: 16px;
+    border: none;
+    outline: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
   input {
     width: 100%;
     height: 100%;
@@ -15,12 +28,18 @@ export const FieldSection = styled.div`
     padding-left: 5px;
     border: none;
   }
+
   input:focus + label > span,
   input:valid + label > span {
     transform: translateY(-135%);
     font-size: 12px;
     color: #fe346e;
   }
+
+  input:valid ~ button > svg {
+    opacity: 1;
+  }
+
   input:focus + label::after,
   input:valid + label::after {
     transform: translateX(0);

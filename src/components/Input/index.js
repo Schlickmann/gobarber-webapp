@@ -3,7 +3,13 @@ import PropTypes from 'prop-types';
 
 import { FieldSection, Label } from './styles';
 
-export default function Input({ type, name, content, handleInputChange }) {
+export default function Input({
+  type,
+  name,
+  content,
+  handleInputChange,
+  children,
+}) {
   return (
     <FieldSection>
       <input
@@ -18,6 +24,7 @@ export default function Input({ type, name, content, handleInputChange }) {
       <Label htmlFor={name}>
         <span>{name}</span>
       </Label>
+      {children}
     </FieldSection>
   );
 }
@@ -25,11 +32,13 @@ export default function Input({ type, name, content, handleInputChange }) {
 Input.propTypes = {
   type: PropTypes.string.isRequired,
   name: PropTypes.string,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  content: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   handleInputChange: PropTypes.func.isRequired,
+  children: PropTypes.element,
 };
 
 Input.defaultProps = {
-  value: '',
+  content: '',
   name: '',
+  children: null,
 };
