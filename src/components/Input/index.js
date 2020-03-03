@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { FieldSection, Label } from './styles';
 
-export default function Input({ type, name, value, handleInputChange }) {
+export default function Input({ type, name, content, handleInputChange }) {
   return (
     <FieldSection>
       <input
@@ -12,8 +12,8 @@ export default function Input({ type, name, value, handleInputChange }) {
         id={name}
         name={name}
         autoComplete="off"
-        value={value}
-        onChange={handleInputChange}
+        value={content}
+        onChange={event => handleInputChange(event.target.value)}
       />
       <Label htmlFor={name}>
         <span>{name}</span>

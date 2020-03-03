@@ -33,6 +33,7 @@ export const Content = styled.div`
       border-radius: 4px;
       font-size: 16px;
       font-weight: bold;
+      transition: background-color 200ms;
 
       &:hover {
         background-color: ${darken(0.05, '#fe346e')};
