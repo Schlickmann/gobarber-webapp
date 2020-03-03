@@ -18,7 +18,7 @@ export default function SignIn() {
 
   return (
     <>
-      <img src={logo} alt="GoBarber" color="#0a0944" />
+      <img src={logo} alt="GoBarber" />
       <form>
         <Input
           type={email.type}
