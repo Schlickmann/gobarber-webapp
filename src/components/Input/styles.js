@@ -10,7 +10,7 @@ export const FieldSection = styled.div`
   input {
     width: 100%;
     height: 100%;
-    color: #f0f0f0;
+    color: #fe346e;
     padding-top: 20px;
     padding-left: 5px;
     border: none;
@@ -19,7 +19,7 @@ export const FieldSection = styled.div`
   input:valid + label > span {
     transform: translateY(-135%);
     font-size: 12px;
-    color: #f0f0f0;
+    color: #fe346e;
   }
   input:focus + label::after,
   input:valid + label::after {
@@ -34,7 +34,7 @@ export const Label = styled.label`
   height: 100%;
   width: 100%;
   pointer-events: none;
-  border-bottom: 1px solid #0a0944;
+  border-bottom: 1px solid #f0f0f0;
 
   &::after {
     content: '';
@@ -43,7 +43,7 @@ export const Label = styled.label`
     bottom: -1;
     height: 100%;
     width: 100%;
-    border-bottom: 3px solid #f0f0f0;
+    border-bottom: 3px solid #fe346e;
     transform: translateX(-100%);
     transform-origin: left;
     transition: transform 0.3s ease;
@@ -55,6 +55,6 @@ export const Label = styled.label`
     left: 0;
     transition: all 0.3s ease;
     padding: 0 5px;
-    color: #0a0944;
+    color: #f0f0f0;
   }
 `;
