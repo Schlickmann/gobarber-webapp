@@ -2,15 +2,15 @@ import React, { createContext, useReducer } from 'react';
 import PropTypes from 'prop-types';
 
 const initialState = {
-  email: {
+  cFieldEmail: {
     value: '',
     type: 'email',
   },
-  password: {
+  cFieldPassword: {
     value: '',
     type: 'password',
   },
-  name: {
+  cFieldName: {
     value: '',
     type: 'text',
   },
@@ -51,9 +51,9 @@ const FormProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const value = {
-    email: state.email,
-    password: state.password,
-    name: state.name,
+    cFieldEmail: state.cFieldEmail,
+    cFieldPassword: state.cFieldPassword,
+    cFieldName: state.cFieldName,
     setEmail: email => {
       dispatch({ type: actions.HANDLE_EMAIL_CHANGE, email });
     },

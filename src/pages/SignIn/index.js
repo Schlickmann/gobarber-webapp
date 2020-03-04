@@ -9,22 +9,28 @@ import Input from '~/components/Input';
 
 export default function SignIn() {
   const {
-    email,
-    password,
+    cFieldEmail,
+    cFieldPassword,
     setEmail,
     setPassword,
     setShowPassword,
   } = useContext(formContext);
 
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    console.log(cFieldEmail, cFieldPassword);
+  }
+
   return (
     <>
       <img src={logo} alt="GoBarber" />
-      <form>
+      <form onSubmit={handleSubmit}>
         <Input
-          type={email.type}
+          type={cFieldEmail.type}
           name="Email"
-          content={email.value}
-          handleInputChange={valor => setEmail(valor)}
+          content={cFieldEmail.value}
+          handleInputChange={text => setEmail(text)}
           icon={<MdClose size={12} color="#fff" />}
         >
           <button type="button" onClick={() => setEmail('')}>
@@ -32,12 +38,12 @@ export default function SignIn() {
           </button>
         </Input>
         <Input
-          type={password.type}
+          type={cFieldPassword.type}
           name="Password"
-          content={password.value}
-          handleInputChange={valor => setPassword(valor)}
+          content={cFieldPassword.value}
+          handleInputChange={text => setPassword(text)}
         >
-          {password.type === 'password' ? (
+          {cFieldPassword.type === 'password' ? (
             <button type="button" onClick={() => setShowPassword(true)}>
               <FaEye size={12} color="#fe346e" />
             </button>
@@ -55,7 +61,7 @@ export default function SignIn() {
         color="#fe346e"
         style={{ marginLeft: 10, marginRight: 10 }}
       />
-      <Link to="/register">Sign Up for GoBarber</Link>
+      <Link to="/register">Sign up for GoBarber</Link>
     </>
   );
 }
