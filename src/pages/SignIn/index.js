@@ -13,9 +13,7 @@ const schema = Yup.object().shape({
   email: Yup.string()
     .email('Inform a valid email address')
     .required('Email is required'),
-  password: Yup.string()
-    .min(6)
-    .required('Password is required'),
+  password: Yup.string().required('Password is required'),
 });
 
 export default function SignIn() {
