@@ -1,11 +1,22 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import * as Yup from 'yup';
+import { toast } from 'react-toastify';
 import { MdFiberManualRecord, MdClose } from 'react-icons/md';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import logo from '~/assets/logo.svg';
 
 import { formContext } from '~/contexts/FormContext';
 import Input from '~/components/Input';
+
+const schema = Yup.object().shape({
+  email: Yup.string()
+    .email('Inform a valid email address')
+    .required('Email is required'),
+  password: Yup.string()
+    .min(6)
+    .required('Password is required'),
+});
 
 export default function SignIn() {
   const {
@@ -16,10 +27,18 @@ export default function SignIn() {
     setShowPassword,
   } = useContext(formContext);
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
 
-    console.log(cFieldEmail, cFieldPassword);
+    await schema
+      .strict()
+      .validate({
+        email: cFieldEmail.value,
+        password: cFieldPassword.value,
+      })
+      .catch(errors => {
+        toast.error(errors.message);
+      });
   }
 
   return (

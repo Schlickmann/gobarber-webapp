@@ -30,7 +30,7 @@ export const FieldSection = styled.div`
   }
 
   input:focus + label > span,
-  input:valid + label > span,
+  /* input:valid + label > span, */
   input:not([value='']) + label > span {
     transform: translateY(-135%);
     font-size: 12px;
@@ -42,7 +42,7 @@ export const FieldSection = styled.div`
   }
 
   input:focus + label::after,
-  input:valid + label::after,
+  /* input:valid + label::after, */
   input:not([value='']) + label::after {
     transform: translateX(0);
   }

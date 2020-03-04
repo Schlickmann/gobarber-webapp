@@ -1,11 +1,23 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import * as Yup from 'yup';
+import { toast } from 'react-toastify';
 import { MdClose } from 'react-icons/md';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import logo from '~/assets/logo.svg';
 
 import { formContext } from '~/contexts/FormContext';
 import Input from '~/components/Input';
+
+const schema = Yup.object().shape({
+  name: Yup.string().required('Name is required'),
+  email: Yup.string()
+    .email('Inform a valid email address')
+    .required('Email is required'),
+  password: Yup.string()
+    .min(6)
+    .required('Password is required'),
+});
 
 export default function SignUp() {
   const {
@@ -18,10 +30,25 @@ export default function SignUp() {
     setShowPassword,
   } = useContext(formContext);
 
+  async function handleSubmit(event) {
+    event.preventDefault();
+
+    await schema
+      .strict()
+      .validate({
+        name: cFieldName.value,
+        email: cFieldEmail.value,
+        password: cFieldPassword.value,
+      })
+      .catch(errors => {
+        toast.error(errors.message);
+      });
+  }
+
   return (
     <>
       <img src={logo} alt="GoBarber" />
-      <form>
+      <form onSubmit={handleSubmit}>
         <Input
           type={cFieldName.type}
           name="Name"

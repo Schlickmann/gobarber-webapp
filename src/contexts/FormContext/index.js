@@ -26,19 +26,25 @@ const actions = {
 function reducer(state, action) {
   switch (action.type) {
     case actions.HANDLE_EMAIL_CHANGE:
-      return { ...state, email: { ...state.email, value: action.email } };
+      return {
+        ...state,
+        cFieldEmail: { ...state.cFieldEmail, value: action.email },
+      };
     case actions.HANDLE_PASSWORD_CHANGE:
       return {
         ...state,
-        password: { ...state.password, value: action.password },
+        cFieldPassword: { ...state.cFieldPassword, value: action.password },
       };
     case actions.HANDLE_PASSWORD_EXHIBITION:
       return {
         ...state,
-        password: { ...state.password, type: action.fieldType },
+        cFieldPassword: { ...state.cFieldPassword, type: action.fieldType },
       };
     case actions.HANDLE_NAME_CHANGE:
-      return { ...state, name: { ...state.name, value: action.name } };
+      return {
+        ...state,
+        cFieldName: { ...state.cFieldName, value: action.name },
+      };
     default:
       return state;
   }

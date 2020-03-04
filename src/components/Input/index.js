@@ -14,7 +14,6 @@ export default function Input({
     <FieldSection>
       <input
         type={type}
-        required
         id={name}
         name={name}
         autoComplete="off"
