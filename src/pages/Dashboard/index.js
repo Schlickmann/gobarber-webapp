@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { authContext } from '~/contexts/AuthContext';
 
 // import { Container } from './styles';
 
 export default function Dashboard() {
-  return <h1>Dashboard</h1>;
+  const { token } = useContext(authContext);
+  return <h1>{token}</h1>;
 }

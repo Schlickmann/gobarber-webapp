@@ -7,6 +7,7 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import logo from '~/assets/logo.svg';
 
 import { formContext } from '~/contexts/FormContext';
+import { authContext } from '~/contexts/AuthContext';
 import Input from '~/components/Input';
 
 const schema = Yup.object().shape({
@@ -25,18 +26,21 @@ export default function SignIn() {
     setShowPassword,
   } = useContext(formContext);
 
+  const { signInRequest } = useContext(authContext);
+
   async function handleSubmit(event) {
     event.preventDefault();
 
-    await schema
-      .strict()
-      .validate({
+    try {
+      await schema.validate({
         email: cFieldEmail.value,
         password: cFieldPassword.value,
-      })
-      .catch(errors => {
-        toast.error(errors.message);
       });
+
+      signInRequest(cFieldEmail.value, cFieldPassword.value);
+    } catch (error) {
+      toast.error(error.message);
+    }
   }
 
   return (

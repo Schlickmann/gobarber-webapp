@@ -16,7 +16,7 @@ const initialState = {
   },
 };
 
-const actions = {
+const Types = {
   HANDLE_EMAIL_CHANGE: '@formContext/HANDLE_EMAIL_CHANGE',
   HANDLE_PASSWORD_CHANGE: '@formContext/HANDLE_PASSWORD_CHANGE',
   HANDLE_PASSWORD_EXHIBITION: '@formContext/HANDLE_PASSWORD_EXHIBITION',
@@ -25,22 +25,22 @@ const actions = {
 
 function reducer(state, action) {
   switch (action.type) {
-    case actions.HANDLE_EMAIL_CHANGE:
+    case Types.HANDLE_EMAIL_CHANGE:
       return {
         ...state,
         cFieldEmail: { ...state.cFieldEmail, value: action.email },
       };
-    case actions.HANDLE_PASSWORD_CHANGE:
+    case Types.HANDLE_PASSWORD_CHANGE:
       return {
         ...state,
         cFieldPassword: { ...state.cFieldPassword, value: action.password },
       };
-    case actions.HANDLE_PASSWORD_EXHIBITION:
+    case Types.HANDLE_PASSWORD_EXHIBITION:
       return {
         ...state,
         cFieldPassword: { ...state.cFieldPassword, type: action.fieldType },
       };
-    case actions.HANDLE_NAME_CHANGE:
+    case Types.HANDLE_NAME_CHANGE:
       return {
         ...state,
         cFieldName: { ...state.cFieldName, value: action.name },
@@ -57,23 +57,21 @@ const FormProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const value = {
-    cFieldEmail: state.cFieldEmail,
-    cFieldPassword: state.cFieldPassword,
-    cFieldName: state.cFieldName,
+    ...state,
     setEmail: email => {
-      dispatch({ type: actions.HANDLE_EMAIL_CHANGE, email });
+      dispatch({ type: Types.HANDLE_EMAIL_CHANGE, email });
     },
     setPassword: password => {
-      dispatch({ type: actions.HANDLE_PASSWORD_CHANGE, password });
+      dispatch({ type: Types.HANDLE_PASSWORD_CHANGE, password });
     },
     setShowPassword: isVisible => {
       dispatch({
-        type: actions.HANDLE_PASSWORD_EXHIBITION,
+        type: Types.HANDLE_PASSWORD_EXHIBITION,
         fieldType: isVisible ? 'text' : 'password',
       });
     },
     setName: name => {
-      dispatch({ type: actions.HANDLE_NAME_CHANGE, name });
+      dispatch({ type: Types.HANDLE_NAME_CHANGE, name });
     },
   };
 
