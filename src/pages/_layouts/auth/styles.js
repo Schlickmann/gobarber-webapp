@@ -43,6 +43,10 @@ export const Content = styled.div`
       &:hover {
         background-color: ${darken(0.05, '#fe346e')};
       }
+    }
+
+    button.loading {
+      cursor: not-allowed;
 
       > svg.spinner {
         animation: ${rotate} 2s infinite;

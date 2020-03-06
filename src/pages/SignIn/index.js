@@ -73,7 +73,11 @@ export default function SignIn() {
             </button>
           )}
         </Input>
-        <button type="submit">
+        <button
+          className={loading ? 'loading' : ''}
+          disabled={loading}
+          type="submit"
+        >
           {loading ? (
             <FaSpinner className="spinner" size={18} color="#fff" />
           ) : (

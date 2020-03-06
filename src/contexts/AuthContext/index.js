@@ -1,6 +1,7 @@
 import React, { createContext, useReducer } from 'react';
 import PropTypes from 'prop-types';
 import produce from 'immer';
+import { toast } from 'react-toastify';
 
 import api from '~/services/api';
 import history from '~/services/history';
@@ -59,26 +60,33 @@ const AuthProvider = ({ children }) => {
     ...auth,
     loading: state.loading,
     signInRequest: async (email, password) => {
-      const response = await api.post('/sessions', {
-        email,
-        password,
-      });
+      try {
+        const response = await api.post('/sessions', {
+          email,
+          password,
+        });
 
-      const { token, user } = response.data;
+        const { token, user } = response.data;
 
-      if (!user.provider) {
-        console.tron.error('User is not a provider');
+        if (!user.provider) {
+          console.tron.error('User is not a provider');
+          dispatch({
+            type: Types.HANDLE_SIGN_IN_FAILURE,
+          });
+        }
+
+        dispatch({
+          type: Types.HANDLE_SIGN_IN_SUCCESS,
+          payload: { token, user, setAuth },
+        });
+
+        history.push('/dashboard');
+      } catch (error) {
+        toast.error(error.response.data.error);
         dispatch({
           type: Types.HANDLE_SIGN_IN_FAILURE,
         });
       }
-
-      dispatch({
-        type: Types.HANDLE_SIGN_IN_SUCCESS,
-        payload: { token, user, setAuth },
-      });
-
-      history.push('/dashboard');
     },
   };
 
