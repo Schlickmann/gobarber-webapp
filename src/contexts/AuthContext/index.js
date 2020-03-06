@@ -14,38 +14,50 @@ const initialState = {
 };
 
 const Types = {
+  HANDLE_SIGN_IN_REQUEST: '@authContext/HANDLE_SIGN_IN_REQUEST',
   HANDLE_SIGN_IN_SUCCESS: '@authContext/HANDLE_SIGN_IN_SUCCESS',
   HANDLE_SIGN_IN_FAILURE: '@authContext/HANDLE_SIGN_IN_FAILURE',
 };
 
 function reducer(state, action) {
-  switch (action.type) {
-    case Types.HANDLE_SIGN_IN_SUCCESS:
-      return produce(state, draft => {
+  return produce(state, draft => {
+    switch (action.type) {
+      case Types.HANDLE_SIGN_IN_REQUEST: {
+        draft.loading = true;
+        break;
+      }
+      case Types.HANDLE_SIGN_IN_SUCCESS: {
         draft.token = action.payload.token;
         draft.user = action.payload.user;
         draft.signed = true;
+        draft.loading = false;
 
         action.payload.setAuth({
           signed: true,
           token: action.payload.token,
           user: action.payload.user,
         });
-      });
-    default:
-      return state;
-  }
+        break;
+      }
+      case Types.HANDLE_SIGN_IN_FAILURE: {
+        draft.loading = false;
+        break;
+      }
+      default:
+    }
+  });
 }
 
 const authContext = createContext(initialState);
 const { Provider } = authContext;
 
 const AuthProvider = ({ children }) => {
-  const [, dispatch] = useReducer(reducer, initialState);
-  const [auth, setAuth] = usePersistedState('auth', null);
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const [auth, setAuth] = usePersistedState('@gobarber/authContext', null);
 
   const value = {
     ...auth,
+    loading: state.loading,
     signInRequest: async (email, password) => {
       const response = await api.post('/sessions', {
         email,

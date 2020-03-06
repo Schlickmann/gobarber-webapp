@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
 import { MdFiberManualRecord, MdClose } from 'react-icons/md';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { FaEye, FaEyeSlash, FaSpinner } from 'react-icons/fa';
 import logo from '~/assets/logo.svg';
 
 import { formContext } from '~/contexts/FormContext';
@@ -26,7 +26,7 @@ export default function SignIn() {
     setShowPassword,
   } = useContext(formContext);
 
-  const { signInRequest } = useContext(authContext);
+  const { signInRequest, loading } = useContext(authContext);
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -52,7 +52,6 @@ export default function SignIn() {
           name="Email"
           content={cFieldEmail.value}
           handleInputChange={text => setEmail(text)}
-          icon={<MdClose size={12} color="#fff" />}
         >
           <button type="button" onClick={() => setEmail('')}>
             <MdClose size={12} color="#fe346e" />
@@ -74,7 +73,13 @@ export default function SignIn() {
             </button>
           )}
         </Input>
-        <button type="submit">Sign In</button>
+        <button type="submit">
+          {loading ? (
+            <FaSpinner className="spinner" size={18} color="#fff" />
+          ) : (
+            'Sign In'
+          )}
+        </button>
       </form>
       <Link to="/recover">Forgot password?</Link>
       <MdFiberManualRecord
