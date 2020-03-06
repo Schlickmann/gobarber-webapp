@@ -9,6 +9,7 @@ const initialState = {
   token: null,
   signed: false,
   loading: false,
+  user: null,
 };
 
 const Types = {
@@ -21,6 +22,7 @@ function reducer(state, action) {
     case Types.HANDLE_SIGN_IN_SUCCESS:
       return produce(state, draft => {
         draft.token = action.payload.token;
+        draft.user = action.payload.user;
         draft.signed = true;
       });
     default:
