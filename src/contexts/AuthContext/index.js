@@ -69,18 +69,18 @@ const AuthProvider = ({ children }) => {
         const { token, user } = response.data;
 
         if (!user.provider) {
-          console.tron.error('User is not a provider');
+          toast.error('User is not a provider');
           dispatch({
             type: Types.HANDLE_SIGN_IN_FAILURE,
           });
+        } else {
+          dispatch({
+            type: Types.HANDLE_SIGN_IN_SUCCESS,
+            payload: { token, user, setAuth },
+          });
+
+          history.push('/dashboard');
         }
-
-        dispatch({
-          type: Types.HANDLE_SIGN_IN_SUCCESS,
-          payload: { token, user, setAuth },
-        });
-
-        history.push('/dashboard');
       } catch (error) {
         toast.error(error.response.data.error);
         dispatch({
