@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
 import { MdClose } from 'react-icons/md';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { FaEye, FaEyeSlash, FaSpinner } from 'react-icons/fa';
 import logo from '~/assets/logo.svg';
 
 import { formContext } from '~/contexts/FormContext';
+import { userContext } from '~/contexts/UserContext';
 import Input from '~/components/Input';
 
 const schema = Yup.object().shape({
@@ -30,19 +31,22 @@ export default function SignUp() {
     setShowPassword,
   } = useContext(formContext);
 
+  const { storeUser, loading } = useContext(userContext);
+
   async function handleSubmit(event) {
     event.preventDefault();
 
-    await schema
-      .strict()
-      .validate({
+    try {
+      await schema.validate({
         name: cFieldName.value,
         email: cFieldEmail.value,
         password: cFieldPassword.value,
-      })
-      .catch(errors => {
-        toast.error(errors.message);
       });
+
+      storeUser(cFieldName.value, cFieldEmail.value, cFieldPassword.value);
+    } catch (error) {
+      toast.error(error.message);
+    }
   }
 
   return (
@@ -87,7 +91,17 @@ export default function SignUp() {
             </button>
           )}
         </Input>
-        <button type="submit">Sign Up</button>
+        <button
+          className={loading ? 'loading' : ''}
+          disabled={loading}
+          type="submit"
+        >
+          {loading ? (
+            <FaSpinner className="spinner" size={18} color="#fff" />
+          ) : (
+            'Sign Up'
+          )}
+        </button>
       </form>
       <Link to="/">Already have an account</Link>
     </>

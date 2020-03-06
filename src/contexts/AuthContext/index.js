@@ -69,7 +69,9 @@ const AuthProvider = ({ children }) => {
         const { token, user } = response.data;
 
         if (!user.provider) {
-          toast.error('User is not a provider');
+          toast.info(
+            'User is not a provider, please use the GoBarber mobile app.'
+          );
           dispatch({
             type: Types.HANDLE_SIGN_IN_FAILURE,
           });
