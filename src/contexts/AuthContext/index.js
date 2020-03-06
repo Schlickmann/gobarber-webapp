@@ -4,6 +4,7 @@ import produce from 'immer';
 
 import api from '~/services/api';
 import history from '~/services/history';
+import usePersistedState from '~/utils/UsePersistedState';
 
 const initialState = {
   token: null,
@@ -24,6 +25,12 @@ function reducer(state, action) {
         draft.token = action.payload.token;
         draft.user = action.payload.user;
         draft.signed = true;
+
+        action.payload.setAuth({
+          signed: true,
+          token: action.payload.token,
+          user: action.payload.user,
+        });
       });
     default:
       return state;
@@ -34,10 +41,11 @@ const authContext = createContext(initialState);
 const { Provider } = authContext;
 
 const AuthProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [, dispatch] = useReducer(reducer, initialState);
+  const [auth, setAuth] = usePersistedState('auth', null);
 
   const value = {
-    ...state,
+    ...auth,
     signInRequest: async (email, password) => {
       const response = await api.post('/sessions', {
         email,
@@ -55,7 +63,7 @@ const AuthProvider = ({ children }) => {
 
       dispatch({
         type: Types.HANDLE_SIGN_IN_SUCCESS,
-        payload: { token, user },
+        payload: { token, user, setAuth },
       });
 
       history.push('/dashboard');
