@@ -1,10 +1,9 @@
 import React, { createContext, useMemo, useReducer } from 'react';
 import PropTypes from 'prop-types';
 import produce from 'immer';
-import { toast } from 'react-toastify';
 
-import api from '~/services/api';
-import history from '~/services/history';
+import { signIn } from './actions';
+
 import usePersistedState from '~/utils/UsePersistedState';
 import setHeader from '~/utils/functions/setHeader';
 
@@ -60,43 +59,15 @@ const AuthProvider = ({ children }) => {
     if (auth) {
       setHeader('Authorization', `Bearer ${auth.token}`);
     }
-
     return { auth, setAuth };
   }, [auth, setAuth]);
 
+  const { auth: authObj } = context;
   const value = {
-    ...context.auth,
+    ...authObj,
     loading: state.loading,
-    signInRequest: async (email, password) => {
-      try {
-        const response = await api.post('/sessions', {
-          email,
-          password,
-        });
-
-        const { token, user } = response.data;
-
-        if (!user.provider) {
-          toast.info(
-            'User is not a provider, please use the GoBarber mobile app.'
-          );
-          dispatch({
-            type: Types.HANDLE_SIGN_IN_FAILURE,
-          });
-        } else {
-          dispatch({
-            type: Types.HANDLE_SIGN_IN_SUCCESS,
-            payload: { token, user, setAuth: context.setAuth },
-          });
-
-          history.push('/dashboard');
-        }
-      } catch (error) {
-        toast.error(error.response.data.error);
-        dispatch({
-          type: Types.HANDLE_SIGN_IN_FAILURE,
-        });
-      }
+    signInRequest: (email, password) => {
+      signIn(email, password, context.setAuth, dispatch);
     },
   };
 
@@ -107,4 +78,4 @@ AuthProvider.propTypes = {
   children: PropTypes.oneOfType([PropTypes.element, PropTypes.func]).isRequired,
 };
 
-export { authContext, AuthProvider };
+export { Types, authContext, AuthProvider };

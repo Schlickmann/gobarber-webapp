@@ -31,7 +31,7 @@ export default function SignUp() {
     setShowPassword,
   } = useContext(formContext);
 
-  const { storeUser, loading } = useContext(userContext);
+  const { storeUserRequest, loading } = useContext(userContext);
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -43,7 +43,11 @@ export default function SignUp() {
         password: cFieldPassword.value,
       });
 
-      storeUser(cFieldName.value, cFieldEmail.value, cFieldPassword.value);
+      storeUserRequest(
+        cFieldName.value,
+        cFieldEmail.value,
+        cFieldPassword.value
+      );
     } catch (error) {
       toast.error(error.message);
     }

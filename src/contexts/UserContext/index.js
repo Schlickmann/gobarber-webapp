@@ -1,10 +1,8 @@
 import React, { createContext, useReducer } from 'react';
 import PropTypes from 'prop-types';
 import produce from 'immer';
-import { toast } from 'react-toastify';
 
-import api from '~/services/api';
-import history from '~/services/history';
+import { storeUser } from './actions';
 
 const initialState = {
   loading: false,
@@ -45,32 +43,8 @@ const UserProvider = ({ children }) => {
 
   const value = {
     ...state,
-    storeUser: async (name, email, password) => {
-      try {
-        const response = await api.post('/users', {
-          name,
-          email,
-          password,
-          provider: true,
-        });
-
-        if (response.status === 200) {
-          toast.success('User added successfully');
-
-          dispatch({
-            type: Types.HANDLE_SIGN_IN_SUCCESS,
-            payload: {},
-          });
-
-          history.push('/');
-        }
-      } catch (error) {
-        toast.error(error.response.data.error);
-
-        dispatch({
-          type: Types.HANDLE_SIGN_UP_FAILURE,
-        });
-      }
+    storeUserRequest: (name, email, password) => {
+      storeUser(name, email, password, dispatch);
     },
   };
 
@@ -81,4 +55,4 @@ UserProvider.propTypes = {
   children: PropTypes.oneOfType([PropTypes.element, PropTypes.func]).isRequired,
 };
 
-export { userContext, UserProvider };
+export { Types, userContext, UserProvider };
