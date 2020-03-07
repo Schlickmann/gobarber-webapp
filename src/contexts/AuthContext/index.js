@@ -1,4 +1,4 @@
-import React, { createContext, useReducer } from 'react';
+import React, { createContext, useMemo, useReducer } from 'react';
 import PropTypes from 'prop-types';
 import produce from 'immer';
 import { toast } from 'react-toastify';
@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import api from '~/services/api';
 import history from '~/services/history';
 import usePersistedState from '~/utils/UsePersistedState';
+import setHeader from '~/utils/functions/setHeader';
 
 const initialState = {
   token: null,
@@ -55,9 +56,16 @@ const { Provider } = authContext;
 const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [auth, setAuth] = usePersistedState('@gobarber/authContext', null);
+  const context = useMemo(() => {
+    if (auth) {
+      setHeader('Authorization', `Bearer ${auth.token}`);
+    }
+
+    return { auth, setAuth };
+  }, [auth, setAuth]);
 
   const value = {
-    ...auth,
+    ...context.auth,
     loading: state.loading,
     signInRequest: async (email, password) => {
       try {
@@ -78,7 +86,7 @@ const AuthProvider = ({ children }) => {
         } else {
           dispatch({
             type: Types.HANDLE_SIGN_IN_SUCCESS,
-            payload: { token, user, setAuth },
+            payload: { token, user, setAuth: context.setAuth },
           });
 
           history.push('/dashboard');
