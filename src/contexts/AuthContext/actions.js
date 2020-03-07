@@ -2,7 +2,7 @@ import { toast } from 'react-toastify';
 
 import api from '~/services/api';
 import history from '~/services/history';
-import { Types } from './index';
+import { Types } from './reducer';
 
 const signIn = async (email, password, setAuth, dispatch) => {
   try {

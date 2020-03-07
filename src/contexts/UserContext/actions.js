@@ -2,7 +2,7 @@ import { toast } from 'react-toastify';
 
 import api from '~/services/api';
 import history from '~/services/history';
-import { Types } from './index';
+import { Types } from './reducer';
 
 const storeUser = async (name, email, password, dispatch) => {
   try {
