@@ -45,36 +45,13 @@ export default function Notifications() {
       </Badge>
       <NotificationList visible={visible}>
         <Scroll>
-          <Notification unread>
-            <p>You have a new appointment tomorrow</p>
-            <time>2 days ago</time>
-            <button type="button">Mark as read</button>
-          </Notification>
-          <Notification>
-            <p>You have a new appointment tomorrow</p>
-            <time>2 days ago</time>
-            <button type="button">Mark as read</button>
-          </Notification>
-          <Notification>
-            <p>You have a new appointment tomorrow</p>
-            <time>2 days ago</time>
-            <button type="button">Mark as read</button>
-          </Notification>
-          <Notification unread>
-            <p>You have a new appointment tomorrow</p>
-            <time>2 days ago</time>
-            <button type="button">Mark as read</button>
-          </Notification>
-          <Notification>
-            <p>You have a new appointment tomorrow</p>
-            <time>2 days ago</time>
-            <button type="button">Mark as read</button>
-          </Notification>
-          <Notification>
-            <p>You have a new appointment tomorrow</p>
-            <time>2 days ago</time>
-            <button type="button">Mark as read</button>
-          </Notification>
+          {notifications.map(notification => (
+            <Notification key={notification._id} unread={!notification.read}>
+              <p>{notification.content}</p>
+              <time>{notification.timeDistance}</time>
+              <button type="button">Mark as read</button>
+            </Notification>
+          ))}
         </Scroll>
       </NotificationList>
     </Container>

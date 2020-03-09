@@ -65,6 +65,7 @@ export const Notification = styled.div`
   }
 
   time {
+    display: block;
     font-size: 12px;
     color: #666;
   }
@@ -74,9 +75,6 @@ export const Notification = styled.div`
     border: 0;
     background: none;
     color: #fe346e;
-    padding: 0 5px;
-    margin: 0 5px;
-    border-left: 1px solid #666;
 
     &:hover {
       color: ${darken(0.2, '#fe346e')};
@@ -93,6 +91,7 @@ export const Notification = styled.div`
         height: 7px;
         background: #fe346e;
         border-radius: 50%;
+        margin-left: 10px;
       }
     `}
 `;
