@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import Notifications from '~/components/Notifications';
+import { authContext } from '~/contexts/AuthContext';
 import logo from '~/assets/logo-white.svg';
 import { Container, Content, Profile } from './styles';
 
 export default function Header() {
+  const {
+    user: { name },
+  } = useContext(authContext);
+
   return (
     <Container>
       <Content>
@@ -17,7 +22,7 @@ export default function Header() {
           <Notifications />
           <Profile>
             <div>
-              <strong>Administrator</strong>
+              <strong>{name}</strong>
               <Link to="/profile">My Profile</Link>
             </div>
             <img

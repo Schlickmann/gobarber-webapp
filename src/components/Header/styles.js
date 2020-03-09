@@ -47,6 +47,7 @@ export const Profile = styled.div`
 
     strong {
       display: block;
+      text-transform: capitalize;
       color: #fe346e;
     }
 
