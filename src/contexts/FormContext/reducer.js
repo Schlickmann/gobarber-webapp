@@ -11,13 +11,23 @@ const INITIAL_STATE = {
     value: '',
     type: 'text',
   },
+  cFieldOldPassword: {
+    value: '',
+    type: 'password',
+  },
+  cFieldConfirmPassword: {
+    value: '',
+    type: 'password',
+  },
 };
 
 const Types = {
+  HANDLE_NAME_CHANGE: '@formContext/HANDLE_NAME_CHANGE',
   HANDLE_EMAIL_CHANGE: '@formContext/HANDLE_EMAIL_CHANGE',
   HANDLE_PASSWORD_CHANGE: '@formContext/HANDLE_PASSWORD_CHANGE',
+  HANDLE_OLD_PASSWORD_CHANGE: '@formContext/HANDLE_OLD_PASSWORD_CHANGE',
+  HANDLE_CONFIRM_PASSWORD_CHANGE: '@formContext/HANDLE_CONFIRM_PASSWORD_CHANGE',
   HANDLE_PASSWORD_EXHIBITION: '@formContext/HANDLE_PASSWORD_EXHIBITION',
-  HANDLE_NAME_CHANGE: '@formContext/HANDLE_NAME_CHANGE',
 };
 
 function reducer(state, action) {
@@ -32,10 +42,29 @@ function reducer(state, action) {
         ...state,
         cFieldPassword: { ...state.cFieldPassword, value: action.password },
       };
+    case Types.HANDLE_OLD_PASSWORD_CHANGE:
+      return {
+        ...state,
+        cFieldOldPassword: {
+          ...state.cFieldOldPassword,
+          value: action.password,
+        },
+      };
+    case Types.HANDLE_CONFIRM_PASSWORD_CHANGE:
+      return {
+        ...state,
+        cFieldConfirmPassword: {
+          ...state.cFieldConfirmPassword,
+          value: action.password,
+        },
+      };
     case Types.HANDLE_PASSWORD_EXHIBITION:
       return {
         ...state,
-        cFieldPassword: { ...state.cFieldPassword, type: action.fieldType },
+        [action.cField]: {
+          ...state[action.cField],
+          type: action.fieldType,
+        },
       };
     case Types.HANDLE_NAME_CHANGE:
       return {

@@ -17,9 +17,16 @@ const FormProvider = ({ children }) => {
     setPassword: password => {
       dispatch({ type: Types.HANDLE_PASSWORD_CHANGE, password });
     },
-    setShowPassword: isVisible => {
+    setOldPassword: password => {
+      dispatch({ type: Types.HANDLE_OLD_PASSWORD_CHANGE, password });
+    },
+    setConfirmPassword: password => {
+      dispatch({ type: Types.HANDLE_CONFIRM_PASSWORD_CHANGE, password });
+    },
+    setShowPassword: (cField, isVisible) => {
       dispatch({
         type: Types.HANDLE_PASSWORD_EXHIBITION,
+        cField,
         fieldType: isVisible ? 'text' : 'password',
       });
     },

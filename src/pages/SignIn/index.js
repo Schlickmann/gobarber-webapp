@@ -41,6 +41,9 @@ export default function SignIn() {
     } catch (error) {
       toast.error(error.message);
     }
+
+    setEmail('');
+    setPassword('');
   }
 
   return (
@@ -64,11 +67,17 @@ export default function SignIn() {
           handleInputChange={text => setPassword(text)}
         >
           {cFieldPassword.type === 'password' ? (
-            <button type="button" onClick={() => setShowPassword(true)}>
+            <button
+              type="button"
+              onClick={() => setShowPassword('cFieldPassword', true)}
+            >
               <FaEye size={12} color="#fe346e" />
             </button>
           ) : (
-            <button type="button" onClick={() => setShowPassword(false)}>
+            <button
+              type="button"
+              onClick={() => setShowPassword('cFieldPassword', false)}
+            >
               <FaEyeSlash size={12} color="#fe346e" />
             </button>
           )}

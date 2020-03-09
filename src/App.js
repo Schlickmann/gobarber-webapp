@@ -8,19 +8,16 @@ import Routes from './routes';
 import history from './services/history';
 import GlobalStyles from './styles/global';
 import { AuthProvider } from './contexts/AuthContext';
-import { UserProvider } from './contexts/UserContext';
 
 function App() {
   return (
-    <UserProvider>
-      <AuthProvider>
-        <Router history={history}>
-          <Routes />
-          <GlobalStyles />
-          <ToastContainer autoClose={3000} />
-        </Router>
-      </AuthProvider>
-    </UserProvider>
+    <AuthProvider>
+      <Router history={history}>
+        <Routes />
+        <GlobalStyles />
+        <ToastContainer autoClose={3000} />
+      </Router>
+    </AuthProvider>
   );
 }
 

@@ -51,6 +51,10 @@ export default function SignUp() {
     } catch (error) {
       toast.error(error.message);
     }
+
+    setName('');
+    setEmail('');
+    setPassword('');
   }
 
   return (
@@ -62,7 +66,6 @@ export default function SignUp() {
           name="Name"
           content={cFieldName.value}
           handleInputChange={text => setName(text)}
-          icon={<MdClose size={12} color="#fff" />}
         >
           <button type="button" onClick={() => setName('')}>
             <MdClose size={12} color="#fe346e" />
@@ -73,7 +76,6 @@ export default function SignUp() {
           name="Email"
           content={cFieldEmail.value}
           handleInputChange={text => setEmail(text)}
-          icon={<MdClose size={12} color="#fff" />}
         >
           <button type="button" onClick={() => setEmail('')}>
             <MdClose size={12} color="#fe346e" />
@@ -86,11 +88,17 @@ export default function SignUp() {
           handleInputChange={text => setPassword(text)}
         >
           {cFieldPassword.type === 'password' ? (
-            <button type="button" onClick={() => setShowPassword(true)}>
+            <button
+              type="button"
+              onClick={() => setShowPassword('cFieldPassword', true)}
+            >
               <FaEye size={12} color="#fe346e" />
             </button>
           ) : (
-            <button type="button" onClick={() => setShowPassword(false)}>
+            <button
+              type="button"
+              onClick={() => setShowPassword('cFieldPassword', false)}
+            >
               <FaEyeSlash size={12} color="#fe346e" />
             </button>
           )}
