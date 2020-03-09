@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { MdNotifications } from 'react-icons/md';
 import { parseISO, formatDistance } from 'date-fns';
 
@@ -14,6 +14,10 @@ import {
 export default function Notifications() {
   const [visible, setVisible] = useState(false);
   const [notifications, setNotifications] = useState([]);
+  const hasUnread = useMemo(
+    () => !!notifications.find(notification => notification.read === false),
+    [notifications]
+  );
 
   useEffect(() => {
     async function getNotifications() {
@@ -38,9 +42,19 @@ export default function Notifications() {
     setVisible(!visible);
   }
 
+  async function handleNotificationRead(id) {
+    await api.put(`/notifications/${id}`);
+
+    setNotifications(
+      notifications.map(notification =>
+        notification._id === id ? { ...notification, read: true } : notification
+      )
+    );
+  }
+
   return (
     <Container>
-      <Badge hasUnread onClick={handleToggleVisible}>
+      <Badge hasUnread={hasUnread} onClick={handleToggleVisible}>
         <MdNotifications color="#f0f0f0" size={20} />
       </Badge>
       <NotificationList visible={visible}>
@@ -49,7 +63,12 @@ export default function Notifications() {
             <Notification key={notification._id} unread={!notification.read}>
               <p>{notification.content}</p>
               <time>{notification.timeDistance}</time>
-              <button type="button">Mark as read</button>
+              <button
+                type="button"
+                onClick={() => handleNotificationRead(notification._id)}
+              >
+                Mark as read
+              </button>
             </Notification>
           ))}
         </Scroll>

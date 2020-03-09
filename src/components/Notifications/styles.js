@@ -52,6 +52,7 @@ export const NotificationList = styled.div`
 
 export const Notification = styled.div`
   color: #142850;
+  opacity: ${props => (props.unread ? '1' : '0.4')};
 
   & + div {
     margin-top: 15px;
@@ -68,6 +69,7 @@ export const Notification = styled.div`
     display: block;
     font-size: 12px;
     color: #666;
+    margin-bottom: 5px;
   }
 
   button {
