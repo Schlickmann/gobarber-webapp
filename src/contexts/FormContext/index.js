@@ -11,17 +11,8 @@ const FormProvider = ({ children }) => {
 
   const value = {
     ...state,
-    setEmail: email => {
-      dispatch({ type: Types.HANDLE_EMAIL_CHANGE, email });
-    },
-    setPassword: password => {
-      dispatch({ type: Types.HANDLE_PASSWORD_CHANGE, password });
-    },
-    setOldPassword: password => {
-      dispatch({ type: Types.HANDLE_OLD_PASSWORD_CHANGE, password });
-    },
-    setConfirmPassword: password => {
-      dispatch({ type: Types.HANDLE_CONFIRM_PASSWORD_CHANGE, password });
+    setField: (cField, content) => {
+      dispatch({ type: Types.HANDLE_FIELD_CHANGE, cField, content });
     },
     setShowPassword: (cField, isVisible) => {
       dispatch({
@@ -29,9 +20,6 @@ const FormProvider = ({ children }) => {
         cField,
         fieldType: isVisible ? 'text' : 'password',
       });
-    },
-    setName: name => {
-      dispatch({ type: Types.HANDLE_NAME_CHANGE, name });
     },
   };
 

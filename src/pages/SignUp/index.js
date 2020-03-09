@@ -25,9 +25,7 @@ export default function SignUp() {
     cFieldName,
     cFieldEmail,
     cFieldPassword,
-    setName,
-    setEmail,
-    setPassword,
+    setField,
     setShowPassword,
   } = useContext(formContext);
 
@@ -52,9 +50,9 @@ export default function SignUp() {
       toast.error(error.message);
     }
 
-    setName('');
-    setEmail('');
-    setPassword('');
+    setField('cFieldEmail', '');
+    setField('cFieldName', '');
+    setField('cFieldPassword', '');
   }
 
   return (
@@ -65,9 +63,9 @@ export default function SignUp() {
           type={cFieldName.type}
           name="Name"
           content={cFieldName.value}
-          handleInputChange={text => setName(text)}
+          handleInputChange={text => setField('cFieldName', text)}
         >
-          <button type="button" onClick={() => setName('')}>
+          <button type="button" onClick={() => setField('cFieldName', '')}>
             <MdClose size={12} color="#fe346e" />
           </button>
         </Input>
@@ -75,9 +73,9 @@ export default function SignUp() {
           type={cFieldEmail.type}
           name="Email"
           content={cFieldEmail.value}
-          handleInputChange={text => setEmail(text)}
+          handleInputChange={text => setField('cFieldEmail', text)}
         >
-          <button type="button" onClick={() => setEmail('')}>
+          <button type="button" onClick={() => setField('cFieldEmail', '')}>
             <MdClose size={12} color="#fe346e" />
           </button>
         </Input>
@@ -85,7 +83,7 @@ export default function SignUp() {
           type={cFieldPassword.type}
           name="Password"
           content={cFieldPassword.value}
-          handleInputChange={text => setPassword(text)}
+          handleInputChange={text => setField('cFieldPassword', text)}
         >
           {cFieldPassword.type === 'password' ? (
             <button

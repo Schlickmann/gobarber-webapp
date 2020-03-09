@@ -18,13 +18,9 @@ const schema = Yup.object().shape({
 });
 
 export default function SignIn() {
-  const {
-    cFieldEmail,
-    cFieldPassword,
-    setEmail,
-    setPassword,
-    setShowPassword,
-  } = useContext(formContext);
+  const { cFieldEmail, cFieldPassword, setField, setShowPassword } = useContext(
+    formContext
+  );
 
   const { signInRequest, loading } = useContext(authContext);
 
@@ -42,8 +38,8 @@ export default function SignIn() {
       toast.error(error.message);
     }
 
-    setEmail('');
-    setPassword('');
+    setField('cFieldEmail', '');
+    setField('cFieldPassword', '');
   }
 
   return (
@@ -54,9 +50,9 @@ export default function SignIn() {
           type={cFieldEmail.type}
           name="Email"
           content={cFieldEmail.value}
-          handleInputChange={text => setEmail(text)}
+          handleInputChange={text => setField('cFieldEmail', text)}
         >
-          <button type="button" onClick={() => setEmail('')}>
+          <button type="button" onClick={() => setField('cFieldEmail', '')}>
             <MdClose size={12} color="#fe346e" />
           </button>
         </Input>
@@ -64,7 +60,7 @@ export default function SignIn() {
           type={cFieldPassword.type}
           name="Password"
           content={cFieldPassword.value}
-          handleInputChange={text => setPassword(text)}
+          handleInputChange={text => setField('cFieldPassword', text)}
         >
           {cFieldPassword.type === 'password' ? (
             <button
