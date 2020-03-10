@@ -32,4 +32,8 @@ const signIn = async (email, password, setAuth, dispatch) => {
   }
 };
 
-export { signIn };
+const logOut = (setAuth, dispatch) => {
+  dispatch({ type: Types.HANDLE_LOG_OUT_REQUEST });
+};
+
+export { signIn, logOut };

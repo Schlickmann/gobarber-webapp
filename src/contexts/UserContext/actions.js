@@ -4,7 +4,7 @@ import api from '~/services/api';
 import history from '~/services/history';
 import { Types } from './reducer';
 
-const storeUser = async (name, email, password, dispatch) => {
+const signUp = async (name, email, password, dispatch) => {
   try {
     const response = await api.post('/users', {
       name,
@@ -17,8 +17,7 @@ const storeUser = async (name, email, password, dispatch) => {
       toast.success('User added successfully');
 
       dispatch({
-        type: Types.HANDLE_SIGN_IN_SUCCESS,
-        payload: {},
+        type: Types.HANDLE_SIGN_UP_SUCCESS,
       });
 
       history.push('/');
@@ -32,4 +31,4 @@ const storeUser = async (name, email, password, dispatch) => {
   }
 };
 
-export { storeUser };
+export { signUp };

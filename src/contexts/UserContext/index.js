@@ -1,8 +1,8 @@
 import React, { createContext, useReducer } from 'react';
 import PropTypes from 'prop-types';
 
-import { storeUser } from './actions';
-import { reducer, INITIAL_STATE } from './reducer';
+import { signUp } from './actions';
+import { reducer, INITIAL_STATE, Types } from './reducer';
 
 const userContext = createContext(INITIAL_STATE);
 const { Provider } = userContext;
@@ -13,7 +13,8 @@ const UserProvider = ({ children }) => {
   const value = {
     ...state,
     storeUserRequest: (name, email, password) => {
-      storeUser(name, email, password, dispatch);
+      dispatch({ type: Types.HANDLE_SIGN_UP_REQUEST });
+      signUp(name, email, password, dispatch);
     },
   };
 

@@ -2,7 +2,7 @@ import React, { createContext, useMemo, useReducer } from 'react';
 import PropTypes from 'prop-types';
 
 import { signIn } from './actions';
-import { reducer, INITIAL_STATE } from './reducer';
+import { reducer, INITIAL_STATE, Types } from './reducer';
 
 import usePersistedState from '~/utils/UsePersistedState';
 import setHeader from '~/utils/functions/setHeader';
@@ -25,6 +25,10 @@ const AuthProvider = ({ children }) => {
     ...authObj,
     loading: state.loading,
     signInRequest: (email, password) => {
+      dispatch({
+        type: Types.HANDLE_SIGN_IN_REQUEST,
+      });
+
       signIn(email, password, context.setAuth, dispatch);
     },
   };
