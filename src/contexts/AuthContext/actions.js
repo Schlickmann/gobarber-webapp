@@ -33,7 +33,18 @@ const signIn = async (email, password, setAuth, dispatch) => {
 };
 
 const logOut = (setAuth, dispatch) => {
-  dispatch({ type: Types.HANDLE_LOG_OUT_REQUEST });
+  try {
+    dispatch({
+      type: Types.HANDLE_LOG_OUT_SUCCESS,
+      payload: { setAuth },
+    });
+    history.push('/');
+  } catch (error) {
+    toast.error('Something went wrong :(');
+    dispatch({
+      type: Types.HANDLE_LOG_OUT_FAILURE,
+    });
+  }
 };
 
 export { signIn, logOut };

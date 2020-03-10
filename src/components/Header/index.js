@@ -7,9 +7,7 @@ import logo from '~/assets/logo-white.svg';
 import { Container, Content, Profile } from './styles';
 
 export default function Header() {
-  const {
-    user: { name },
-  } = useContext(authContext);
+  const { user } = useContext(authContext);
 
   return (
     <Container>
@@ -22,7 +20,7 @@ export default function Header() {
           <Notifications />
           <Profile>
             <div>
-              <strong>{name}</strong>
+              <strong>{user ? user.name : 'username'}</strong>
               <Link to="/profile">My Profile</Link>
             </div>
             <img

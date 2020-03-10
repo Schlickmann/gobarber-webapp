@@ -4,6 +4,9 @@ const Types = {
   HANDLE_SIGN_IN_REQUEST: '@authContext/HANDLE_SIGN_IN_REQUEST',
   HANDLE_SIGN_IN_SUCCESS: '@authContext/HANDLE_SIGN_IN_SUCCESS',
   HANDLE_SIGN_IN_FAILURE: '@authContext/HANDLE_SIGN_IN_FAILURE',
+  HANDLE_LOG_OUT_REQUEST: '@authContext/HANDLE_LOG_OUT_REQUEST',
+  HANDLE_LOG_OUT_SUCCESS: '@authContext/HANDLE_LOG_OUT_SUCCESS',
+  HANDLE_LOG_OUT_FAILURE: '@authContext/HANDLE_LOG_OUT_FAILURE',
 };
 
 const INITIAL_STATE = {
@@ -34,6 +37,23 @@ function reducer(state, action) {
         break;
       }
       case Types.HANDLE_SIGN_IN_FAILURE: {
+        draft.loading = false;
+        break;
+      }
+      case Types.HANDLE_LOG_OUT_REQUEST: {
+        draft.loading = true;
+        break;
+      }
+      case Types.HANDLE_LOG_OUT_SUCCESS: {
+        draft.token = null;
+        draft.user = null;
+        draft.signed = false;
+        draft.loading = false;
+
+        action.payload.setAuth({});
+        break;
+      }
+      case Types.HANDLE_LOG_OUT_FAILURE: {
         draft.loading = false;
         break;
       }

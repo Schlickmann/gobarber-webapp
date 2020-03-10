@@ -19,7 +19,7 @@ export default function Profile() {
     setShowPassword,
   } = useContext(formContext);
 
-  const { loading, user } = useContext(authContext);
+  const { loading, user, logOutRequest } = useContext(authContext);
 
   useEffect(() => {
     function loadUserProfile() {
@@ -133,7 +133,9 @@ export default function Profile() {
           )}
         </button>
       </form>
-      <button type="button">LOG OUT</button>
+      <button type="button" onClick={logOutRequest}>
+        LOG OUT
+      </button>
     </Container>
   );
 }
