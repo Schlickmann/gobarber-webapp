@@ -53,6 +53,8 @@ export default function Profile() {
             <MdClose size={12} color="#fe346e" />
           </button>
         </Input>
+        <br />
+        <br />
         <Input
           type={cFieldOldPassword.type}
           name="Old Password"
@@ -131,7 +133,7 @@ export default function Profile() {
           )}
         </button>
       </form>
-      <button type="button">Log out</button>
+      <button type="button">LOG OUT</button>
     </Container>
   );
 }

@@ -44,4 +44,21 @@ export const Container = styled.div`
       }
     }
   }
+
+  > button {
+    width: 100%;
+    margin: 5px 0 5px 0;
+    height: 44px;
+    border: 0;
+    background-color: #f0f0f0;
+    color: #142850;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 200ms;
+
+    &:hover {
+      background-color: ${darken(0.05, '#f0f0f0')};
+    }
+  }
 `;
