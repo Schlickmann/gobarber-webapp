@@ -61,7 +61,7 @@ export default function SignUp() {
       <form onSubmit={handleSubmit}>
         <Input
           type={cFieldName.type}
-          name="Name"
+          name={cFieldName.name}
           content={cFieldName.value}
           handleInputChange={text => setField('cFieldName', text)}
         >
@@ -71,7 +71,7 @@ export default function SignUp() {
         </Input>
         <Input
           type={cFieldEmail.type}
-          name="Email"
+          name={cFieldEmail.name}
           content={cFieldEmail.value}
           handleInputChange={text => setField('cFieldEmail', text)}
         >
@@ -81,7 +81,7 @@ export default function SignUp() {
         </Input>
         <Input
           type={cFieldPassword.type}
-          name="Password"
+          name={cFieldPassword.name}
           content={cFieldPassword.value}
           handleInputChange={text => setField('cFieldPassword', text)}
         >

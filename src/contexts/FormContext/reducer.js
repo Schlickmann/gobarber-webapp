@@ -1,21 +1,26 @@
 const INITIAL_STATE = {
   cFieldEmail: {
+    name: 'Email',
     value: '',
     type: 'email',
   },
   cFieldPassword: {
+    name: 'Password',
     value: '',
     type: 'password',
   },
   cFieldName: {
+    name: 'Name',
     value: '',
     type: 'text',
   },
   cFieldOldPassword: {
+    name: 'Old Password',
     value: '',
     type: 'password',
   },
   cFieldConfirmPassword: {
+    name: 'Confirm Password',
     value: '',
     type: 'password',
   },

@@ -1,7 +1,7 @@
 import React, { createContext, useReducer } from 'react';
 import PropTypes from 'prop-types';
 
-import { signUp } from './actions';
+import { signUp, updateUser } from './actions';
 import { reducer, INITIAL_STATE, Types } from './reducer';
 
 const userContext = createContext(INITIAL_STATE);
@@ -15,6 +15,10 @@ const UserProvider = ({ children }) => {
     storeUserRequest: (name, email, password) => {
       dispatch({ type: Types.HANDLE_SIGN_UP_REQUEST });
       signUp(name, email, password, dispatch);
+    },
+    updateUserRequest: data => {
+      dispatch({ type: Types.HANDLE_UPDATE_REQUEST });
+      updateUser(data, dispatch);
     },
   };
 

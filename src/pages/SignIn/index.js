@@ -48,7 +48,7 @@ export default function SignIn() {
       <form onSubmit={handleSubmit}>
         <Input
           type={cFieldEmail.type}
-          name="Email"
+          name={cFieldEmail.name}
           content={cFieldEmail.value}
           handleInputChange={text => setField('cFieldEmail', text)}
         >
@@ -58,7 +58,7 @@ export default function SignIn() {
         </Input>
         <Input
           type={cFieldPassword.type}
-          name="Password"
+          name={cFieldPassword.name}
           content={cFieldPassword.value}
           handleInputChange={text => setField('cFieldPassword', text)}
         >

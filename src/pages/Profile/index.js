@@ -6,6 +6,7 @@ import { FaEye, FaEyeSlash, FaSpinner } from 'react-icons/fa';
 import Input from '~/components/Input';
 import { authContext } from '~/contexts/AuthContext';
 import { formContext } from '~/contexts/FormContext';
+import { userContext } from '~/contexts/UserContext';
 import { Container } from './styles';
 
 export default function Profile() {
@@ -20,6 +21,7 @@ export default function Profile() {
   } = useContext(formContext);
 
   const { loading, user, logOutRequest } = useContext(authContext);
+  const { updateUserRequest } = useContext(userContext);
 
   useEffect(() => {
     function loadUserProfile() {
@@ -30,12 +32,26 @@ export default function Profile() {
     loadUserProfile();
   }, []);
 
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    const data = {
+      email: cFieldEmail.value,
+      name: cFieldName.value,
+      oldPassword: cFieldOldPassword.value,
+      password: cFieldPassword.value,
+      passwordConfirmation: cFieldConfirmPassword.value,
+    };
+
+    updateUserRequest(data);
+  }
+
   return (
     <Container>
-      <form>
+      <form onSubmit={handleSubmit}>
         <Input
           type={cFieldName.type}
-          name="Name"
+          name={cFieldName.name}
           content={cFieldName.value}
           handleInputChange={text => setField('cFieldName', text)}
         >
@@ -45,7 +61,7 @@ export default function Profile() {
         </Input>
         <Input
           type={cFieldEmail.type}
-          name="Email"
+          name={cFieldEmail.name}
           content={cFieldEmail.value}
           handleInputChange={text => setField('cFieldEmail', text)}
         >
@@ -57,7 +73,7 @@ export default function Profile() {
         <br />
         <Input
           type={cFieldOldPassword.type}
-          name="Old Password"
+          name={cFieldOldPassword.name}
           content={cFieldOldPassword.value}
           handleInputChange={text => setField('cFieldOldPassword', text)}
         >
@@ -79,7 +95,7 @@ export default function Profile() {
         </Input>
         <Input
           type={cFieldPassword.type}
-          name="Password"
+          name={cFieldPassword.name}
           content={cFieldPassword.value}
           handleInputChange={text => setField('cFieldPassword', text)}
         >
@@ -101,7 +117,7 @@ export default function Profile() {
         </Input>
         <Input
           type={cFieldConfirmPassword.type}
-          name="Confirm Password"
+          name={cFieldConfirmPassword.name}
           content={cFieldConfirmPassword.value}
           handleInputChange={text => setField('cFieldConfirmPassword', text)}
         >
