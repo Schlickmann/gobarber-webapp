@@ -44,7 +44,9 @@ export default function Profile() {
     setShowPassword,
   } = useContext(formContext);
 
-  const { loading, user, logOutRequest } = useContext(authContext);
+  const { loading, user, logOutRequest, updateContext } = useContext(
+    authContext
+  );
   const { updateUserRequest } = useContext(userContext);
 
   useEffect(() => {
@@ -70,7 +72,7 @@ export default function Profile() {
 
       await schema.validate(data);
 
-      updateUserRequest(data);
+      updateUserRequest(data, updateContext);
     } catch (error) {
       toast.error(error.message);
     }

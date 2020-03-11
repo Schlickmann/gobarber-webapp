@@ -29,6 +29,19 @@ function reducer(state, action) {
         draft.loading = false;
         break;
       }
+      case Types.HANDLE_UPDATE_REQUEST: {
+        draft.loading = true;
+        break;
+      }
+      case Types.HANDLE_UPDATE_SUCCESS: {
+        draft.loading = false;
+
+        action.payload.authContext.setAuth({
+          ...action.payload.authContext.auth,
+          user: action.payload.user,
+        });
+        break;
+      }
       default:
     }
   });

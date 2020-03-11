@@ -42,6 +42,7 @@ const AuthProvider = ({ children }) => {
 
       logOut(context.setAuth, dispatch);
     },
+    updateContext: context,
   };
 
   return <Provider value={value}>{children}</Provider>;

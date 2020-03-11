@@ -31,7 +31,7 @@ const signUp = async (name, email, password, dispatch) => {
   }
 };
 
-const updateUser = async (data, dispatch) => {
+const updateUser = async (data, authContext, dispatch) => {
   try {
     const { name, email, ...rest } = data;
 
@@ -42,7 +42,7 @@ const updateUser = async (data, dispatch) => {
     toast.success('Profile updated successfully');
     dispatch({
       type: Types.HANDLE_UPDATE_SUCCESS,
-      payload: { data: response.data },
+      payload: { user: response.data, authContext },
     });
   } catch (error) {
     toast.error(error.response.data.error);

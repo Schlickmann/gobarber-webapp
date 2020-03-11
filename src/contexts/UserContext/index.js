@@ -16,9 +16,9 @@ const UserProvider = ({ children }) => {
       dispatch({ type: Types.HANDLE_SIGN_UP_REQUEST });
       signUp(name, email, password, dispatch);
     },
-    updateUserRequest: data => {
+    updateUserRequest: (data, authContext) => {
       dispatch({ type: Types.HANDLE_UPDATE_REQUEST });
-      updateUser(data, dispatch);
+      updateUser(data, authContext, dispatch);
     },
   };
 
