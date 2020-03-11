@@ -44,10 +44,8 @@ export default function Profile() {
     setShowPassword,
   } = useContext(formContext);
 
-  const { loading, user, logOutRequest, updateContext } = useContext(
-    authContext
-  );
-  const { updateUserRequest } = useContext(userContext);
+  const { user, logOutRequest, updateContext } = useContext(authContext);
+  const { updateUserRequest, loading } = useContext(userContext);
 
   useEffect(() => {
     function loadUserProfile() {
@@ -91,7 +89,7 @@ export default function Profile() {
           content={cFieldName.value}
           handleInputChange={text => setField('cFieldName', text)}
         >
-          <button type="button" onClick={() => {}}>
+          <button type="button" onClick={() => setField('cFieldName', '')}>
             <MdClose size={12} color="#fe346e" />
           </button>
         </Input>
@@ -101,7 +99,7 @@ export default function Profile() {
           content={cFieldEmail.value}
           handleInputChange={text => setField('cFieldEmail', text)}
         >
-          <button type="button" onClick={() => {}}>
+          <button type="button" onClick={() => setField('cFieldEmail', '')}>
             <MdClose size={12} color="#fe346e" />
           </button>
         </Input>

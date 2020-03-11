@@ -42,6 +42,10 @@ function reducer(state, action) {
         });
         break;
       }
+      case Types.HANDLE_UPDATE_FAILURE: {
+        draft.loading = false;
+        break;
+      }
       default:
     }
   });
