@@ -2,12 +2,36 @@
 import React, { useEffect, useContext } from 'react';
 import { MdClose } from 'react-icons/md';
 import { FaEye, FaEyeSlash, FaSpinner } from 'react-icons/fa';
+import * as Yup from 'yup';
+import { toast } from 'react-toastify';
 
 import Input from '~/components/Input';
 import { authContext } from '~/contexts/AuthContext';
 import { formContext } from '~/contexts/FormContext';
 import { userContext } from '~/contexts/UserContext';
 import { Container } from './styles';
+
+const schema = Yup.object().shape({
+  name: Yup.string().required('Name is required'),
+  email: Yup.string()
+    .email('Inform a valid email address')
+    .required('Email is required'),
+  oldPassword: Yup.string(),
+  password: Yup.string().when('oldPassword', (oldPassword, field) =>
+    oldPassword.trim()
+      ? field
+          .required('New password is required')
+          .min(6, 'Password needs to be at least 6 characters long')
+      : field
+  ),
+  passwordConfirmation: Yup.string().when('password', (password, field) =>
+    password.trim()
+      ? field
+          .required('Password Confirmation is required')
+          .oneOf([Yup.ref('password')], 'Password confirmation does not match')
+      : field
+  ),
+});
 
 export default function Profile() {
   const {
@@ -32,18 +56,28 @@ export default function Profile() {
     loadUserProfile();
   }, []);
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
 
-    const data = {
-      email: cFieldEmail.value,
-      name: cFieldName.value,
-      oldPassword: cFieldOldPassword.value,
-      password: cFieldPassword.value,
-      passwordConfirmation: cFieldConfirmPassword.value,
-    };
+    try {
+      const data = {
+        email: cFieldEmail.value,
+        name: cFieldName.value,
+        oldPassword: cFieldOldPassword.value,
+        password: cFieldPassword.value,
+        passwordConfirmation: cFieldConfirmPassword.value,
+      };
 
-    updateUserRequest(data);
+      await schema.validate(data);
+
+      updateUserRequest(data);
+    } catch (error) {
+      toast.error(error.message);
+    }
+
+    setField('cFieldOldPassword', '');
+    setField('cFieldPassword', '');
+    setField('cFieldConfirmPassword', '');
   }
 
   return (

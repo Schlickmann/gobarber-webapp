@@ -37,8 +37,6 @@ const updateUser = async (data, dispatch) => {
 
     const user = { name, email, ...(rest.oldPassword.trim() ? rest : {}) };
 
-    console.log(data);
-
     const response = await api.put('/users', user);
 
     toast.success('Profile updated successfully');
