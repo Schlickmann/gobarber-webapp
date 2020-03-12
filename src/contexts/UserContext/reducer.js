@@ -11,6 +11,9 @@ const Types = {
   HANDLE_UPDATE_REQUEST: '@authContext/HANDLE_UPDATE_REQUEST',
   HANDLE_UPDATE_SUCCESS: '@authContext/HANDLE_UPDATE_SUCCESS',
   HANDLE_UPDATE_FAILURE: '@authContext/HANDLE_UPDATE_FAILURE',
+  HANDLE_AVATAR_UPDATE_REQUEST: '@authContext/HANDLE_AVATAR_UPDATE_REQUEST',
+  HANDLE_AVATAR_UPDATE_SUCCESS: '@authContext/HANDLE_AVATAR_UPDATE_SUCCESS',
+  HANDLE_AVATAR_UPDATE_FAILURE: '@authContext/HANDLE_AVATAR_UPDATE_FAILURE',
 };
 
 function reducer(state, action) {
@@ -36,13 +39,33 @@ function reducer(state, action) {
       case Types.HANDLE_UPDATE_SUCCESS: {
         draft.loading = false;
 
-        action.payload.authContext.setAuth({
-          ...action.payload.authContext.auth,
-          user: action.payload.user,
-        });
+        // action.payload.authContext.setAuth({
+        //   ...action.payload.authContext.auth,
+        //   user: action.payload.user,
+        // });
         break;
       }
       case Types.HANDLE_UPDATE_FAILURE: {
+        draft.loading = false;
+        break;
+      }
+      case Types.HANDLE_AVATAR_UPDATE_REQUEST: {
+        draft.loading = true;
+        break;
+      }
+      case Types.HANDLE_AVATAR_UPDATE_SUCCESS: {
+        draft.loading = false;
+
+        // action.payload.authContext.setAuth({
+        //   ...action.payload.authContext.auth,
+        //   user: {
+        //     ...action.payload.authContext.auth.user,
+        //     avatar: action.payload.file,
+        //   },
+        // });
+        break;
+      }
+      case Types.HANDLE_AVATAR_UPDATE_FAILURE: {
         draft.loading = false;
         break;
       }

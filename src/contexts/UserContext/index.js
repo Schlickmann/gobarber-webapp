@@ -1,7 +1,7 @@
 import React, { createContext, useReducer } from 'react';
 import PropTypes from 'prop-types';
 
-import { signUp, updateUser } from './actions';
+import { signUp, updateUser, uploadAvatar } from './actions';
 import { reducer, INITIAL_STATE, Types } from './reducer';
 
 const userContext = createContext(INITIAL_STATE);
@@ -19,6 +19,10 @@ const UserProvider = ({ children }) => {
     updateUserRequest: (data, authContext) => {
       dispatch({ type: Types.HANDLE_UPDATE_REQUEST });
       updateUser(data, authContext, dispatch);
+    },
+    uploadUserAvatar: (file, authContext) => {
+      dispatch({ type: Types.HANDLE_AVATAR_UPDATE_REQUEST });
+      uploadAvatar(file, authContext, dispatch);
     },
   };
 

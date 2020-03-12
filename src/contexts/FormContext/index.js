@@ -12,13 +12,24 @@ const FormProvider = ({ children }) => {
   const value = {
     ...state,
     setField: (cField, content) => {
-      dispatch({ type: Types.HANDLE_FIELD_CHANGE, cField, content });
+      dispatch({
+        type: Types.HANDLE_FIELD_CHANGE,
+        payload: { cField, content },
+      });
     },
     setShowPassword: (cField, isVisible) => {
       dispatch({
         type: Types.HANDLE_PASSWORD_EXHIBITION,
-        cField,
-        fieldType: isVisible ? 'text' : 'password',
+        payload: {
+          cField,
+          fieldType: isVisible ? 'text' : 'password',
+        },
+      });
+    },
+    setAvatarUrl: content => {
+      dispatch({
+        type: Types.HANDLE_AVATAR_URL_UPDATE,
+        payload: { url: content },
       });
     },
   };

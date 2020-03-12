@@ -30,8 +30,9 @@ const INITIAL_STATE = {
     type: 'password',
   },
   cFieldAvatar: {
-    name: 'avatar',
+    name: 'avatar_id',
     value: '',
+    url: null,
     type: 'file',
   },
 };
@@ -46,14 +47,25 @@ function reducer(state, action) {
     case Types.HANDLE_FIELD_CHANGE:
       return {
         ...state,
-        [action.cField]: { ...state[action.cField], value: action.content },
+        [action.payload.cField]: {
+          ...state[action.payload.cField],
+          value: action.payload.content,
+        },
       };
     case Types.HANDLE_PASSWORD_EXHIBITION:
       return {
         ...state,
-        [action.cField]: {
-          ...state[action.cField],
-          type: action.fieldType,
+        [action.payload.cField]: {
+          ...state[action.payload.cField],
+          type: action.payload.fieldType,
+        },
+      };
+    case Types.HANDLE_AVATAR_URL_UPDATE:
+      return {
+        ...state,
+        cFieldAvatar: {
+          ...state.cFieldAvatar,
+          url: action.payload.url,
         },
       };
     default:

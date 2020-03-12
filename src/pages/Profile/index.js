@@ -41,18 +41,18 @@ export default function Profile() {
     cFieldPassword,
     cFieldOldPassword,
     cFieldConfirmPassword,
+    cFieldAvatar,
     setField,
     setShowPassword,
   } = useContext(formContext);
 
-  const { user, logOutRequest, updateContext } = useContext(authContext);
+  const { user, logOutRequest } = useContext(authContext);
   const { updateUserRequest, loading } = useContext(userContext);
 
   useEffect(() => {
     function loadUserProfile() {
       setField('cFieldEmail', user.email);
       setField('cFieldName', user.name);
-      setField('cFieldAvatar', user.ava);
     }
 
     loadUserProfile();
@@ -63,16 +63,17 @@ export default function Profile() {
 
     try {
       const data = {
-        email: cFieldEmail.value,
-        name: cFieldName.value,
-        oldPassword: cFieldOldPassword.value,
-        password: cFieldPassword.value,
-        passwordConfirmation: cFieldConfirmPassword.value,
+        [cFieldEmail.name]: cFieldEmail.value,
+        [cFieldName.name]: cFieldName.value,
+        [cFieldOldPassword.name]: cFieldOldPassword.value,
+        [cFieldPassword.name]: cFieldPassword.value,
+        [cFieldConfirmPassword.name]: cFieldConfirmPassword.value,
+        [cFieldAvatar.name]: cFieldAvatar.value,
       };
 
       await schema.validate(data);
 
-      updateUserRequest(data, updateContext);
+      updateUserRequest(data);
     } catch (error) {
       toast.error(error.message);
     }
@@ -85,7 +86,7 @@ export default function Profile() {
   return (
     <Container>
       <form onSubmit={handleSubmit}>
-        <AvatarInput content={updateContext.auth.user.avatar} />
+        <AvatarInput />
         <Input
           type={cFieldName.type}
           name={cFieldName.name}
