@@ -49,6 +49,7 @@ export default function SignIn() {
         <Input
           type={cFieldEmail.type}
           name={cFieldEmail.name}
+          label={cFieldEmail.label}
           content={cFieldEmail.value}
           handleInputChange={text => setField('cFieldEmail', text)}
         >
@@ -59,6 +60,7 @@ export default function SignIn() {
         <Input
           type={cFieldPassword.type}
           name={cFieldPassword.name}
+          label={cFieldPassword.label}
           content={cFieldPassword.value}
           handleInputChange={text => setField('cFieldPassword', text)}
         >

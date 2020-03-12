@@ -6,6 +6,7 @@ import { FieldSection, Label } from './styles';
 export default function Input({
   type,
   name,
+  label,
   content,
   handleInputChange,
   children,
@@ -21,7 +22,7 @@ export default function Input({
         onChange={event => handleInputChange(event.target.value)}
       />
       <Label htmlFor={name}>
-        <span>{name}</span>
+        <span>{label}</span>
       </Label>
       {children}
     </FieldSection>
@@ -31,6 +32,7 @@ export default function Input({
 Input.propTypes = {
   type: PropTypes.string.isRequired,
   name: PropTypes.string,
+  label: PropTypes.string,
   content: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   handleInputChange: PropTypes.func.isRequired,
   children: PropTypes.element,
@@ -39,5 +41,6 @@ Input.propTypes = {
 Input.defaultProps = {
   content: '',
   name: '',
+  label: '',
   children: null,
 };

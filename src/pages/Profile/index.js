@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 import { toast } from 'react-toastify';
 
 import Input from '~/components/Input';
+import AvatarInput from '~/components/AvatarInput';
 import { authContext } from '~/contexts/AuthContext';
 import { formContext } from '~/contexts/FormContext';
 import { userContext } from '~/contexts/UserContext';
@@ -51,6 +52,7 @@ export default function Profile() {
     function loadUserProfile() {
       setField('cFieldEmail', user.email);
       setField('cFieldName', user.name);
+      setField('cFieldAvatar', user.ava);
     }
 
     loadUserProfile();
@@ -83,9 +85,11 @@ export default function Profile() {
   return (
     <Container>
       <form onSubmit={handleSubmit}>
+        <AvatarInput content={updateContext.auth.user.avatar} />
         <Input
           type={cFieldName.type}
           name={cFieldName.name}
+          label={cFieldName.label}
           content={cFieldName.value}
           handleInputChange={text => setField('cFieldName', text)}
         >
@@ -96,6 +100,7 @@ export default function Profile() {
         <Input
           type={cFieldEmail.type}
           name={cFieldEmail.name}
+          label={cFieldEmail.label}
           content={cFieldEmail.value}
           handleInputChange={text => setField('cFieldEmail', text)}
         >
@@ -108,6 +113,7 @@ export default function Profile() {
         <Input
           type={cFieldOldPassword.type}
           name={cFieldOldPassword.name}
+          label={cFieldOldPassword.label}
           content={cFieldOldPassword.value}
           handleInputChange={text => setField('cFieldOldPassword', text)}
         >
@@ -130,6 +136,7 @@ export default function Profile() {
         <Input
           type={cFieldPassword.type}
           name={cFieldPassword.name}
+          label={cFieldPassword.label}
           content={cFieldPassword.value}
           handleInputChange={text => setField('cFieldPassword', text)}
         >
@@ -152,6 +159,7 @@ export default function Profile() {
         <Input
           type={cFieldConfirmPassword.type}
           name={cFieldConfirmPassword.name}
+          label={cFieldConfirmPassword.label}
           content={cFieldConfirmPassword.value}
           handleInputChange={text => setField('cFieldConfirmPassword', text)}
         >
