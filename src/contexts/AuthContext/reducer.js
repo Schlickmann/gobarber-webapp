@@ -13,7 +13,6 @@ const INITIAL_STATE = {
   token: null,
   signed: false,
   loading: false,
-  // user: null,
 };
 
 function reducer(state, action) {
@@ -25,14 +24,12 @@ function reducer(state, action) {
       }
       case Types.HANDLE_SIGN_IN_SUCCESS: {
         draft.token = action.payload.token;
-        // draft.user = action.payload.user;
         draft.signed = true;
         draft.loading = false;
 
         action.payload.setAuth({
           signed: true,
           token: action.payload.token,
-          // user: action.payload.user,
         });
         break;
       }
@@ -46,7 +43,6 @@ function reducer(state, action) {
       }
       case Types.HANDLE_LOG_OUT_SUCCESS: {
         draft.token = null;
-        draft.user = null;
         draft.signed = false;
         draft.loading = false;
 

@@ -35,12 +35,15 @@ const signIn = async (email, password, setAuth, updateAuthUser, dispatch) => {
   }
 };
 
-const logOut = (setAuth, dispatch) => {
+const logOut = (setAuth, updateAuthUser, dispatch) => {
   try {
     dispatch({
       type: Types.HANDLE_LOG_OUT_SUCCESS,
       payload: { setAuth },
     });
+
+    updateAuthUser(null);
+
     history.push('/');
   } catch (error) {
     toast.error('Something went wrong :(');

@@ -45,7 +45,7 @@ const AuthProvider = ({ children }) => {
         type: Types.HANDLE_LOG_OUT_REQUEST,
       });
 
-      logOut(context.setAuth, dispatch);
+      logOut(context.setAuth, updateAuthUser, dispatch);
     },
   };
 
