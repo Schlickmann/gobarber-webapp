@@ -3,13 +3,11 @@ import React, { useContext, useEffect } from 'react';
 
 import { formContext } from '~/contexts/FormContext';
 import { userContext } from '~/contexts/UserContext';
-import { authContext } from '~/contexts/AuthContext';
 import { Container } from './styles';
 
 export default function AvatarInput() {
   const { cFieldAvatar, setAvatarUrl, setField } = useContext(formContext);
-  const { user } = useContext(authContext);
-  const { uploadUserAvatar } = useContext(userContext);
+  const { uploadUserAvatar, user } = useContext(userContext);
 
   function handleChange(event) {
     uploadUserAvatar(event.target.files[0]);

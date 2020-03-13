@@ -4,7 +4,7 @@ import api from '~/services/api';
 import history from '~/services/history';
 import { Types } from './reducer';
 
-const signIn = async (email, password, setAuth, dispatch) => {
+const signIn = async (email, password, setAuth, updateAuthUser, dispatch) => {
   try {
     const response = await api.post('/sessions', {
       email,
@@ -21,8 +21,11 @@ const signIn = async (email, password, setAuth, dispatch) => {
     }
     dispatch({
       type: Types.HANDLE_SIGN_IN_SUCCESS,
-      payload: { token, user, setAuth },
+      payload: { token, setAuth },
     });
+
+    updateAuthUser(user);
+
     history.push('/dashboard');
   } catch (error) {
     toast.error(error.response.data.error);

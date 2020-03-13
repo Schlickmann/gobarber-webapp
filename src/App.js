@@ -9,17 +9,20 @@ import history from './services/history';
 import GlobalStyles from './styles/global';
 import { AuthProvider } from './contexts/AuthContext';
 import { FormProvider } from '~/contexts/FormContext';
+import { UserProvider } from '~/contexts/UserContext';
 
 function App() {
   return (
     <FormProvider>
-      <AuthProvider>
-        <Router history={history}>
-          <Routes />
-          <GlobalStyles />
-          <ToastContainer autoClose={3000} />
-        </Router>
-      </AuthProvider>
+      <UserProvider>
+        <AuthProvider>
+          <Router history={history}>
+            <Routes />
+            <GlobalStyles />
+            <ToastContainer autoClose={3000} />
+          </Router>
+        </AuthProvider>
+      </UserProvider>
     </FormProvider>
   );
 }

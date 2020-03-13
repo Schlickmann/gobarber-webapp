@@ -2,12 +2,12 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import Notifications from '~/components/Notifications';
-import { authContext } from '~/contexts/AuthContext';
+import { userContext } from '~/contexts/UserContext';
 import logo from '~/assets/logo-white.svg';
 import { Container, Content, Profile } from './styles';
 
 export default function Header() {
-  const { user } = useContext(authContext);
+  const { user } = useContext(userContext);
 
   return (
     <Container>

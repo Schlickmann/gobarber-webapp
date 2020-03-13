@@ -46,8 +46,8 @@ export default function Profile() {
     setShowPassword,
   } = useContext(formContext);
 
-  const { user, logOutRequest } = useContext(authContext);
-  const { updateUserRequest, loading } = useContext(userContext);
+  const { logOutRequest } = useContext(authContext);
+  const { updateUserRequest, loading, user } = useContext(userContext);
 
   useEffect(() => {
     function loadUserProfile() {

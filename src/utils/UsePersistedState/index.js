@@ -9,5 +9,9 @@ export default function usePersistedState(key, defaultValue) {
     localStorage.setItem(key, JSON.stringify(state));
   }, [key, state]);
 
-  return [state, setState];
+  function getState() {
+    return JSON.parse(localStorage.getItem(key));
+  }
+
+  return [state, setState, getState];
 }
