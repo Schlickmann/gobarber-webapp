@@ -31,7 +31,7 @@ const signUp = async (name, email, password, dispatch) => {
   }
 };
 
-const uploadAvatar = async (file, authContext, dispatch) => {
+const uploadAvatar = async (file, authContext, setAvatar, dispatch) => {
   try {
     const data = new FormData();
 
@@ -40,10 +40,11 @@ const uploadAvatar = async (file, authContext, dispatch) => {
     const response = await api.post('/files', data);
 
     toast.success('Avatar uploaded successfully');
+    setAvatar({ id: response.data.id, url: response.data.url });
 
     dispatch({
       type: Types.HANDLE_AVATAR_UPDATE_SUCCESS,
-      payload: { file: response.data /* authContext */ },
+      payload: { file: response.data, authContext },
     });
   } catch (error) {
     toast.error(error.response.data.error);
@@ -70,7 +71,7 @@ const updateUser = async (data, authContext, dispatch) => {
     toast.success('Profile updated successfully');
     dispatch({
       type: Types.HANDLE_UPDATE_SUCCESS,
-      payload: { user: response.data /* authContext */ },
+      payload: { user: response.data, authContext },
     });
   } catch (error) {
     toast.error(error.response.data.error);

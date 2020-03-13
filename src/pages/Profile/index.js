@@ -44,6 +44,7 @@ export default function Profile() {
     cFieldAvatar,
     setField,
     setShowPassword,
+    setAvatar,
   } = useContext(formContext);
 
   const { logOutRequest } = useContext(authContext);
@@ -81,6 +82,12 @@ export default function Profile() {
     setField('cFieldOldPassword', '');
     setField('cFieldPassword', '');
     setField('cFieldConfirmPassword', '');
+  }
+
+  function handeLogOut() {
+    logOutRequest();
+
+    setAvatar({ id: '', url: null });
   }
 
   return (
@@ -192,7 +199,7 @@ export default function Profile() {
           )}
         </button>
       </form>
-      <button type="button" onClick={logOutRequest}>
+      <button type="button" onClick={handeLogOut}>
         LOG OUT
       </button>
     </Container>

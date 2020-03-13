@@ -1,9 +1,10 @@
-import React, { createContext, useReducer, useMemo } from 'react';
+import React, { createContext, useReducer, useMemo, useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import { signUp, updateUser, uploadAvatar } from './actions';
 import { reducer, INITIAL_STATE, Types } from './reducer';
 import usePersistedState from '~/utils/UsePersistedState';
+import { formContext } from '~/contexts/FormContext';
 
 const userContext = createContext(INITIAL_STATE);
 const { Provider } = userContext;
@@ -18,6 +19,8 @@ const UserProvider = ({ children }) => {
     return { auth, setAuth, getState };
   }, [auth, setAuth, getState]);
 
+  const { setAvatar } = useContext(formContext);
+
   const {
     auth: { user },
   } = context;
@@ -31,11 +34,11 @@ const UserProvider = ({ children }) => {
     },
     updateUserRequest: data => {
       dispatch({ type: Types.HANDLE_UPDATE_REQUEST });
-      updateUser(data, dispatch);
+      updateUser(data, context, dispatch);
     },
     uploadUserAvatar: file => {
       dispatch({ type: Types.HANDLE_AVATAR_UPDATE_REQUEST });
-      uploadAvatar(file, dispatch);
+      uploadAvatar(file, context, setAvatar, dispatch);
     },
     updateAuthUser: authUser => {
       dispatch({

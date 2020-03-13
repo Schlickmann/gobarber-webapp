@@ -66,6 +66,7 @@ function reducer(state, action) {
         cFieldAvatar: {
           ...state.cFieldAvatar,
           url: action.payload.url,
+          value: action.payload.value,
         },
       };
     default:

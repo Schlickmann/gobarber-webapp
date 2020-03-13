@@ -6,7 +6,7 @@ import { userContext } from '~/contexts/UserContext';
 import { Container } from './styles';
 
 export default function AvatarInput() {
-  const { cFieldAvatar, setAvatarUrl, setField } = useContext(formContext);
+  const { cFieldAvatar, setAvatar } = useContext(formContext);
   const { uploadUserAvatar, user } = useContext(userContext);
 
   function handleChange(event) {
@@ -15,8 +15,7 @@ export default function AvatarInput() {
 
   useEffect(() => {
     if (user.avatar) {
-      setField('cFieldAvatar', user.avatar.id);
-      setAvatarUrl(user.avatar.url);
+      setAvatar({ id: user.avatar.id, url: user.avatar.url });
     }
   }, []);
 

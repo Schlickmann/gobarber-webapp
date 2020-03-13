@@ -48,10 +48,10 @@ function reducer(state, action) {
       case Types.HANDLE_UPDATE_SUCCESS: {
         draft.loading = false;
 
-        // action.payload.authContext.setAuth({
-        //   ...action.payload.authContext.auth,
-        //   user: action.payload.user,
-        // });
+        action.payload.authContext.setAuth({
+          ...action.payload.authContext.getState('@gobarber/authContext'),
+          user: action.payload.user,
+        });
         break;
       }
       case Types.HANDLE_UPDATE_FAILURE: {
@@ -65,13 +65,15 @@ function reducer(state, action) {
       case Types.HANDLE_AVATAR_UPDATE_SUCCESS: {
         draft.loading = false;
 
-        // action.payload.authContext.setAuth({
-        //   ...action.payload.authContext.auth,
-        //   user: {
-        //     ...action.payload.authContext.auth.user,
-        //     avatar: action.payload.file,
-        //   },
-        // });
+        action.payload.authContext.setAuth({
+          ...action.payload.authContext.getState('@gobarber/authContext'),
+          user: {
+            ...action.payload.authContext.getState('@gobarber/authContext')
+              .user,
+            avatar: action.payload.file,
+          },
+        });
+
         break;
       }
       case Types.HANDLE_AVATAR_UPDATE_FAILURE: {

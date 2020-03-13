@@ -26,10 +26,10 @@ const FormProvider = ({ children }) => {
         },
       });
     },
-    setAvatarUrl: content => {
+    setAvatar: data => {
       dispatch({
         type: Types.HANDLE_AVATAR_URL_UPDATE,
-        payload: { url: content },
+        payload: { url: data.url, value: data.id },
       });
     },
   };
