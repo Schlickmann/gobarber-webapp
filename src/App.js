@@ -10,17 +10,20 @@ import GlobalStyles from './styles/global';
 import { AuthProvider } from './contexts/AuthContext';
 import { FormProvider } from '~/contexts/FormContext';
 import { UserProvider } from '~/contexts/UserContext';
+import { ScheduleProvider } from '~/contexts/ScheduleContext';
 
 function App() {
   return (
     <FormProvider>
       <UserProvider>
         <AuthProvider>
-          <Router history={history}>
-            <Routes />
-            <GlobalStyles />
-            <ToastContainer autoClose={3000} />
-          </Router>
+          <ScheduleProvider>
+            <Router history={history}>
+              <Routes />
+              <GlobalStyles />
+              <ToastContainer autoClose={3000} />
+            </Router>
+          </ScheduleProvider>
         </AuthProvider>
       </UserProvider>
     </FormProvider>
