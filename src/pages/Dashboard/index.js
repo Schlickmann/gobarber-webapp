@@ -1,5 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useMemo, useContext, useEffect } from 'react';
 import { format, subDays, addDays } from 'date-fns';
+
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 
 import { scheduleContext } from '~/contexts/ScheduleContext';
@@ -11,12 +13,13 @@ export default function Dashboard() {
   const dateFormatted = useMemo(() => format(date, 'MMMM do'), [date]);
 
   const { user } = useContext(userContext);
-  const { schedule, scheduleRequest, timesheet, timesheetRequest } = useContext(
-    scheduleContext
-  );
+  const { schedule, scheduleRequest } = useContext(scheduleContext);
 
   useEffect(() => {
-    timesheetRequest();
+    function loadDashboard() {
+      scheduleRequest({ userId: user.id, date });
+    }
+    loadDashboard();
   }, []);
 
   function handlePreviousDay() {
@@ -40,22 +43,14 @@ export default function Dashboard() {
       </header>
 
       <ul>
-        <Time past>
-          <strong>08:00</strong>
-          <span>Juliani Schlickmann Damasceno</span>
-        </Time>
-        <Time available>
-          <strong>08:00</strong>
-          <span>Time available</span>
-        </Time>
-        <Time>
-          <strong>09:00</strong>
-          <span>Emerson Mellado</span>
-        </Time>
-        <Time>
-          <strong>10:00</strong>
-          <span>Maria Fernandes</span>
-        </Time>
+        {schedule.map(s => (
+          <Time key={s.time} past={s.past} available={s.available}>
+            <strong>{s.time}</strong>
+            <span>
+              {s.appointment ? s.appointment.user.name : 'Time available'}
+            </span>
+          </Time>
+        ))}
       </ul>
     </Container>
   );
