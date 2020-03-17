@@ -19,8 +19,10 @@ export default function Dashboard() {
     function loadDashboard() {
       scheduleRequest({ userId: user.id, date });
     }
-    loadDashboard();
-  }, []);
+    if (user) {
+      loadDashboard();
+    }
+  }, [date]);
 
   function handlePreviousDay() {
     setDate(subDays(date, 1));
@@ -43,11 +45,11 @@ export default function Dashboard() {
       </header>
 
       <ul>
-        {schedule.map(s => (
-          <Time key={s.time} past={s.past} available={s.available}>
-            <strong>{s.time}</strong>
+        {schedule.map(time => (
+          <Time key={time.time} past={time.past} available={time.available}>
+            <strong>{time.time}</strong>
             <span>
-              {s.appointment ? s.appointment.user.name : 'Time available'}
+              {time.appointment ? time.appointment.user.name : 'Time available'}
             </span>
           </Time>
         ))}
