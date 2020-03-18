@@ -9,6 +9,7 @@ import {
   NotificationList,
   Notification,
   Scroll,
+  Overlay,
 } from './styles';
 
 export default function Notifications() {
@@ -75,6 +76,7 @@ export default function Notifications() {
           ))}
         </Scroll>
       </NotificationList>
+      <Overlay visible={visible} />
     </Container>
   );
 }

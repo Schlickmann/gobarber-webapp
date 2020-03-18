@@ -22,7 +22,7 @@ export default function Dashboard() {
     if (user) {
       loadDashboard();
     }
-  }, [date]);
+  }, [user, date]);
 
   function handlePreviousDay() {
     setDate(subDays(date, 1));

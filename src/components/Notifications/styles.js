@@ -36,7 +36,7 @@ export const NotificationList = styled.div`
   border-radius: 4px;
   padding: 15px 5px;
   display: ${props => (props.visible ? 'block' : 'none')};
-  z-index: 1;
+  z-index: 2;
 
   &::before {
     content: '';
@@ -102,4 +102,18 @@ export const Notification = styled.div`
 export const Scroll = styled(PerfectScrollBar)`
   max-height: 260px;
   padding: 5px 15px;
+`;
+
+export const Overlay = styled.div`
+  position: fixed;
+  display: ${props => (props.visible ? 'block' : 'none')};
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+  pointer-events: none;
 `;
