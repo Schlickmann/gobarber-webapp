@@ -40,6 +40,7 @@ const INITIAL_STATE = {
 const Types = {
   HANDLE_FIELD_CHANGE: '@formContext/HANDLE_FIELD_CHANGE',
   HANDLE_PASSWORD_EXHIBITION: '@formContext/HANDLE_PASSWORD_EXHIBITION',
+  HANDLE_AVATAR_URL_UPDATE: '@formContext/HANDLE_AVATAR_URL_UPDATE',
 };
 
 function reducer(state, action) {

@@ -67,7 +67,6 @@ const updateUser = async (data, authContext, dispatch) => {
     };
 
     const response = await api.put('/users', user);
-
     toast.success('Profile updated successfully');
     dispatch({
       type: Types.HANDLE_UPDATE_SUCCESS,
