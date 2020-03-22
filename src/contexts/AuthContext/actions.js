@@ -18,6 +18,7 @@ const signIn = async (email, password, setAuth, updateAuthUser, dispatch) => {
       dispatch({
         type: Types.HANDLE_SIGN_IN_FAILURE,
       });
+      return;
     }
     dispatch({
       type: Types.HANDLE_SIGN_IN_SUCCESS,
