@@ -6,7 +6,7 @@
   GoBarber Web Application
 </h3>
 
-<h4 align="center"> 
+<h4 align="center">
 	:construction: 🚀 Project In progress.. :construction:
 </h4>
 
@@ -14,7 +14,7 @@
   <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/Schlickmann/gobarber-webapp?color=%2304D361">
 
   <img alt="Repository size" src="https://img.shields.io/github/repo-size/Schlickmann/gobarber-webapp">
-	
+
   <a href="https://www.linkedin.com/in/juliani-schlickmann-damasceno/" target="_blank">
     <img alt="Made by Schlickmann" src="https://img.shields.io/badge/made%20by-Schlickmann-%2304D361">
   </a>
@@ -46,7 +46,7 @@ This project was developed with the following technologies:
 
 - [React](https://reactjs.org)
   - [GoBarber Web](https://github.com/Schlickmann/gobarber-webapp)
-- [Node.js](https://nodejs.org/en/) 
+- [Node.js](https://nodejs.org/en/)
   - [GoBarber API](https://github.com/Schlickmann/gobarber-api)
 - [React Native](https://facebook.github.io/react-native/) in coming :construction:
   - [GoBarber Mobile](https://github.com/Schlickmann/gobarber-app)
@@ -70,7 +70,7 @@ After merging your receipt request to done, you can delete a branch from yours.
 
 ## :memo: License
 
-This project is under the MIT license. See the [LICENSE](LICENSE.md) for details.
+This project is under the MIT license. See the [LICENSE](LICENSE) for details.
 
 ---
 
