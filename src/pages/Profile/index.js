@@ -84,7 +84,7 @@ export default function Profile() {
     setField('cFieldConfirmPassword', '');
   }
 
-  function handeLogOut() {
+  function handleLogOut() {
     logOutRequest();
 
     setAvatar({ id: '', url: null });
@@ -199,7 +199,7 @@ export default function Profile() {
           )}
         </button>
       </form>
-      <button type="button" onClick={handeLogOut}>
+      <button type="button" onClick={handleLogOut}>
         LOG OUT
       </button>
     </Container>
