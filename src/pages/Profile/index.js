@@ -55,9 +55,10 @@ export default function Profile() {
       setField('cFieldEmail', user.email);
       setField('cFieldName', user.name);
     }
-
-    loadUserProfile();
-  }, []);
+    if (user) {
+      loadUserProfile();
+    }
+  }, [user]);
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -88,6 +89,8 @@ export default function Profile() {
     logOutRequest();
 
     setAvatar({ id: '', url: null });
+    setField('cFieldName', '');
+    setField('cFieldEmail', '');
   }
 
   return (

@@ -6,7 +6,6 @@ const INITIAL_STATE = {
 };
 
 const Types = {
-  HANDLE_SIGN_IN_SUCCESS: '@userContext/HANDLE_SIGN_IN_SUCCESS',
   HANDLE_SIGN_UP_REQUEST: '@userContext/HANDLE_SIGN_UP_REQUEST',
   HANDLE_SIGN_UP_SUCCESS: '@userContext/HANDLE_SIGN_UP_SUCCESS',
   HANDLE_SIGN_UP_FAILURE: '@userContext/HANDLE_SIGN_UP_FAILURE',
@@ -21,13 +20,6 @@ const Types = {
 function reducer(state, action) {
   return produce(state, draft => {
     switch (action.type) {
-      case Types.HANDLE_SIGN_IN_SUCCESS: {
-        action.payload.context.setAuth({
-          ...action.payload.context.getState('@gobarber/authContext'),
-          user: action.payload.user,
-        });
-        break;
-      }
       case Types.HANDLE_SIGN_UP_REQUEST: {
         draft.loading = true;
         break;
@@ -49,7 +41,6 @@ function reducer(state, action) {
         draft.loading = false;
 
         action.payload.authContext.setAuth({
-          ...action.payload.authContext.getState('@gobarber/authContext'),
           user: action.payload.user,
         });
         break;
@@ -66,9 +57,8 @@ function reducer(state, action) {
         draft.loading = false;
 
         action.payload.authContext.setAuth({
-          ...action.payload.authContext.getState('@gobarber/authContext'),
           user: {
-            ...action.payload.authContext.getState('@gobarber/authContext')
+            ...action.payload.authContext.getState('@gobarber/userContext')
               .user,
             avatar: action.payload.file,
           },

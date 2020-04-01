@@ -14,10 +14,10 @@ export default function Input({
   return (
     <FieldSection>
       <input
+        autoComplete="new-password"
         type={type}
         id={name}
         name={name}
-        autoComplete="off"
         value={content}
         onChange={event => handleInputChange(event.target.value)}
       />

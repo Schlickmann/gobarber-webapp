@@ -14,7 +14,7 @@ export default function AvatarInput() {
   }
 
   useEffect(() => {
-    if (user.avatar) {
+    if (user && user.avatar) {
       setAvatar({ id: user.avatar.id, url: user.avatar.url });
     }
   }, []);
@@ -25,7 +25,7 @@ export default function AvatarInput() {
         <img
           src={
             cFieldAvatar.url ||
-            'https://api.adorable.io/avatars/50/abott@adorable.png'
+            `https://api.adorable.io/avatar/50/${user.name}.png`
           }
           alt="Avatar"
         />

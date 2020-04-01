@@ -12,7 +12,7 @@ const { Provider } = userContext;
 const UserProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
   const [auth, setAuth, getState] = usePersistedState(
-    '@gobarber/authContext',
+    '@gobarber/userContext',
     {}
   );
   const context = useMemo(() => {
@@ -41,10 +41,8 @@ const UserProvider = ({ children }) => {
       uploadAvatar(file, context, setAvatar, dispatch);
     },
     updateAuthUser: authUser => {
-      dispatch({
-        type: Types.HANDLE_SIGN_IN_SUCCESS,
-        payload: { user: authUser, context },
-      });
+      const userInfo = !authUser ? {} : { user: authUser };
+      setAuth(userInfo);
     },
   };
 
