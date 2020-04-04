@@ -29,7 +29,7 @@ const getSchedule = async (data, dispatch) => {
 
     const timesheet = await getTimesheet({
       ...data,
-      date: new Date(data.date).getTime(),
+      date: data.date.getTime(),
     });
 
     const schedule = timesheet.map(t => {
