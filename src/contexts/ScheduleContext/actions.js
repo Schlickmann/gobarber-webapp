@@ -5,7 +5,7 @@ import { parseISO, isEqual } from 'date-fns';
 import api from '~/services/api';
 import { Types } from './reducer';
 
-const getTimesheet = async data => {
+const getAvailableTime = async data => {
   try {
     const response = await api.get(`/providers/${data.userId}/available`, {
       params: { date: data.date },
@@ -27,7 +27,7 @@ const getSchedule = async (data, dispatch) => {
       params: { date: data.date.getTime() },
     });
 
-    const timesheet = await getTimesheet({
+    const timesheet = await getAvailableTime({
       ...data,
       date: data.date.getTime(),
     });
@@ -55,4 +55,20 @@ const getSchedule = async (data, dispatch) => {
   }
 };
 
-export { getSchedule };
+const getTimesheet = async dispatch => {
+  try {
+    const response = await api.get(`/provider/timesheet`);
+
+    dispatch({
+      type: Types.HANDLE_TIMESHEET_SUCCESS,
+      payload: { timesheet: response.data },
+    });
+  } catch (error) {
+    toast.error(error.response.data.error);
+    dispatch({
+      type: Types.HANDLE_TIMESHEET_FAILURE,
+    });
+  }
+};
+
+export { getSchedule, getTimesheet };
