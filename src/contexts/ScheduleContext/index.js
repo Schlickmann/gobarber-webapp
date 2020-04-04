@@ -1,7 +1,7 @@
 import React, { createContext, useReducer } from 'react';
 import PropTypes from 'prop-types';
 
-import { getSchedule } from './actions';
+import { getSchedule, getTimesheet } from './actions';
 import { reducer, INITIAL_STATE, Types } from './reducer';
 
 const scheduleContext = createContext(INITIAL_STATE);
@@ -18,6 +18,11 @@ const ScheduleProvider = ({ children }) => {
       });
 
       getSchedule(data, dispatch);
+    },
+    timesheetRequest: () => {
+      dispatch({ type: Types.HANDLE_TIMESHEET_REQUEST });
+
+      getTimesheet(dispatch);
     },
   };
 

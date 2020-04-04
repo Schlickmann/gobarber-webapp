@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 export const Container = styled.div`
   max-width: 600px;
@@ -8,8 +8,10 @@ export const Container = styled.div`
   flex-direction: column;
 
   header {
+    width: 100%;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     align-self: center;
 
     button {
@@ -22,15 +24,14 @@ export const Container = styled.div`
     }
 
     strong {
-      color: #fe346e;
+      color: #f0f0f0;
       font-size: 24px;
-      margin: 0 15px;
     }
   }
 
   ul {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     grid-gap: 15px;
     margin-top: 30px;
   }
@@ -46,27 +47,6 @@ export const Time = styled.li`
     color: #f0f0f0;
     font-size: 20px;
     font-weight: normal;
+    text-align: center;
   }
-
-  span {
-    display: block;
-    color: #142850;
-    margin-top: 3px;
-  }
-
-  ${props =>
-    (props.available || props.past) &&
-    css`
-      & {
-        background: #f0f0f0;
-
-        strong {
-          color: ${props.available ? '#fe346e' : '#999'};
-        }
-
-        span {
-          color: ${props.available ? '#142850' : '#999'};
-        }
-      }
-    `}
 `;
