@@ -55,13 +55,35 @@ const getSchedule = async (data, dispatch) => {
   }
 };
 
+const getAvailableHours = async () => {
+  try {
+    const response = await api.get('/timesheet');
+    console.tron.log(response.data);
+    return response.data;
+  } catch (error) {
+    toast.error(error.response.data.error);
+    return [];
+  }
+};
+
 const getTimesheet = async dispatch => {
   try {
+    const schedule = await getAvailableHours();
+
     const response = await api.get(`/provider/timesheet`);
+
+    const timesheet = schedule.map(hour => {
+      return {
+        ...hour,
+        used: !!response.data.find(a => a.time === hour.time),
+      };
+    });
+
+    console.tron.log(timesheet);
 
     dispatch({
       type: Types.HANDLE_TIMESHEET_SUCCESS,
-      payload: { timesheet: response.data },
+      payload: { timesheet },
     });
   } catch (error) {
     toast.error(error.response.data.error);
@@ -71,4 +93,4 @@ const getTimesheet = async dispatch => {
   }
 };
 
-export { getSchedule, getTimesheet };
+export { getSchedule, getTimesheet, getAvailableHours };

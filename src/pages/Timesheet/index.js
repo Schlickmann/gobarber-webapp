@@ -4,6 +4,7 @@ import { FaRegCalendarPlus } from 'react-icons/fa';
 import { scheduleContext } from '~/contexts/ScheduleContext';
 
 import Modal from '~/components/Modal';
+import AvailableHours from '~/components/AvailableHours';
 import { Container, Time } from './styles';
 
 export default function Timesheet() {
@@ -33,16 +34,22 @@ export default function Timesheet() {
       </header>
 
       <ul>
-        {timesheet.map(time => (
-          <Time key={time.id}>
-            <strong>{time.time}</strong>
-          </Time>
-        ))}
+        {timesheet.map(time => {
+          if (time.used) {
+            return (
+              <Time key={time.id}>
+                <strong>{time.time}</strong>
+              </Time>
+            );
+          }
+
+          return null;
+        })}
       </ul>
       <Modal
         show={show}
         title="Add hour to schedule"
-        content={() => <div>MODAL CONTENT</div>}
+        content={() => <AvailableHours />}
         buttons={[
           <button type="button" onClick={toggle} className="secondary">
             Close
