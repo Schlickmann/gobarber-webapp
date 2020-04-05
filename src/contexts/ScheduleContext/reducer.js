@@ -7,6 +7,12 @@ const Types = {
   HANDLE_TIMESHEET_REQUEST: '@timesheetContext/HANDLE_TIMESHEET_REQUEST',
   HANDLE_TIMESHEET_SUCCESS: '@timesheetContext/HANDLE_TIMESHEET_SUCCESS',
   HANDLE_TIMESHEET_FAILURE: '@timesheetContext/HANDLE_TIMESHEET_FAILURE',
+  HANDLE_DELETE_HOUR_REQUEST: '@timesheetContext/HANDLE_DELETE_HOUR_REQUEST',
+  HANDLE_DELETE_HOUR_SUCCESS: '@timesheetContext/HANDLE_DELETE_HOUR_SUCCESS',
+  HANDLE_DELETE_HOUR_FAILURE: '@timesheetContext/HANDLE_DELETE_HOUR_FAILURE',
+  HANDLE_ADD_HOUR_REQUEST: '@timesheetContext/HANDLE_ADD_HOUR_REQUEST',
+  HANDLE_ADD_HOUR_SUCCESS: '@timesheetContext/HANDLE_ADD_HOUR_SUCCESS',
+  HANDLE_ADD_HOUR_FAILURE: '@timesheetContext/HANDLE_ADD_HOUR_FAILURE',
 };
 
 const INITIAL_STATE = {
@@ -39,6 +45,44 @@ function reducer(state, action) {
         break;
       }
       case Types.HANDLE_TIMESHEET_FAILURE: {
+        draft.loading = false;
+        break;
+      }
+      case Types.HANDLE_DELETE_HOUR_REQUEST: {
+        draft.loading = true;
+        break;
+      }
+      case Types.HANDLE_DELETE_HOUR_SUCCESS: {
+        draft.timesheet = state.timesheet.map(time =>
+          time.id === action.payload.id
+            ? {
+                ...time,
+                used: false,
+              }
+            : time
+        );
+        break;
+      }
+      case Types.HANDLE_DELETE_HOUR_FAILURE: {
+        draft.loading = false;
+        break;
+      }
+      case Types.HANDLE_ADD_HOUR_REQUEST: {
+        draft.loading = true;
+        break;
+      }
+      case Types.HANDLE_ADD_HOUR_SUCCESS: {
+        draft.timesheet = state.timesheet.map(time =>
+          time.id === action.payload.id
+            ? {
+                ...time,
+                used: true,
+              }
+            : time
+        );
+        break;
+      }
+      case Types.HANDLE_ADD_HOUR_FAILURE: {
         draft.loading = false;
         break;
       }

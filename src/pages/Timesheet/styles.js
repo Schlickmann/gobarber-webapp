@@ -40,13 +40,24 @@ export const Container = styled.div`
 export const Time = styled.li`
   padding: 20px;
   border-radius: 4px;
-  background: #fe346e;
+  background: ${props => (props.used ? '#fe346e' : '#f0f0f0')};
+  opacity: ${props => (props.used ? 1 : 0.8)};
+  position: relative;
 
   strong {
     display: block;
-    color: #f0f0f0;
+    color: ${props => (props.used ? '#f0f0f0' : '#fe346e')};
     font-size: 20px;
     font-weight: normal;
     text-align: center;
+  }
+
+  button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 5px;
+    background: transparent;
+    border: 0;
   }
 `;
