@@ -53,30 +53,4 @@ export const Content = styled.div`
       }
     }
   }
-
-  a {
-    display: inline-block;
-    position: relative;
-    color: #f0f0f0;
-    line-height: 1.8;
-
-    &::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      height: 2px;
-      background-color: #fe346e;
-
-      transform: scaleX(0);
-      transform-origin: right;
-      transition: transform 250ms ease-in;
-    }
-
-    &:hover:after {
-      transform: scaleX(1);
-      transform-origin: left;
-    }
-  }
 `;
