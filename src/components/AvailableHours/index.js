@@ -12,7 +12,8 @@ export default function AvailableHours() {
       {timesheet.map(time => {
         return (
           <Time key={time.id} used={time.used}>
-            <strong>{time.time}</strong>
+            <input type="checkbox" id={time.id} />
+            <label htmlFor={time.id}>{time.time}</label>
           </Time>
         );
       })}

@@ -1,7 +1,7 @@
 import React, { createContext, useReducer } from 'react';
 import PropTypes from 'prop-types';
 
-import { getSchedule, getTimesheet } from './actions';
+import { getSchedule, getTimesheet, deleteHour, addHour } from './actions';
 import { reducer, INITIAL_STATE, Types } from './reducer';
 
 const scheduleContext = createContext(INITIAL_STATE);
@@ -23,6 +23,16 @@ const ScheduleProvider = ({ children }) => {
       dispatch({ type: Types.HANDLE_TIMESHEET_REQUEST });
 
       getTimesheet(dispatch);
+    },
+    deleteHourRequest: id => {
+      dispatch({ type: Types.HANDLE_DELETE_HOUR_REQUEST });
+
+      deleteHour(id, dispatch);
+    },
+    addHourRequest: id => {
+      dispatch({ type: Types.HANDLE_DELETE_HOUR_REQUEST });
+
+      addHour(id, dispatch);
     },
   };
 

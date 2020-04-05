@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { darken } from 'polished';
 
 export const Container = styled.div`
   max-width: 600px;
@@ -6,6 +7,7 @@ export const Container = styled.div`
 
   display: flex;
   flex-direction: column;
+  height: 100%;
 
   header {
     display: flex;
@@ -69,4 +71,39 @@ export const Time = styled.li`
         }
       }
     `}
+`;
+
+export const InitialMessage = styled.div`
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  strong {
+    font-size: 22px;
+    color: #f0f0f0;
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: #f0f0f0;
+    background-color: #fe346e;
+    border-radius: 4px;
+    padding: 1rem;
+    margin-top: 1rem;
+    opacity: 1;
+    transition: background-color 250ms;
+
+    &:hover {
+      background-color: ${darken(0.03, '#fe346e')};
+    }
+
+    svg {
+      margin-right: 4px;
+    }
+  }
 `;

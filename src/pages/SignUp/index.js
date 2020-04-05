@@ -116,7 +116,9 @@ export default function SignUp() {
           )}
         </button>
       </form>
-      <Link to="/">Already have an account</Link>
+      <Link className="underline" to="/">
+        Already have an account
+      </Link>
     </>
   );
 }

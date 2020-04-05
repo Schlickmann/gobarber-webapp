@@ -79,8 +79,6 @@ const getTimesheet = async dispatch => {
       };
     });
 
-    console.tron.log(timesheet);
-
     dispatch({
       type: Types.HANDLE_TIMESHEET_SUCCESS,
       payload: { timesheet },
@@ -93,4 +91,36 @@ const getTimesheet = async dispatch => {
   }
 };
 
-export { getSchedule, getTimesheet, getAvailableHours };
+const deleteHour = async (id, dispatch) => {
+  try {
+    await api.delete(`/provider/timesheet/${id}`);
+
+    dispatch({
+      type: Types.HANDLE_DELETE_HOUR_SUCCESS,
+      payload: { id },
+    });
+  } catch (error) {
+    toast.error(error.response.data.error);
+    dispatch({
+      type: Types.HANDLE_DELETE_HOUR_FAILURE,
+    });
+  }
+};
+
+const addHour = async (id, dispatch) => {
+  try {
+    await api.post(`/provider/timesheet`, { time_id: id });
+
+    dispatch({
+      type: Types.HANDLE_ADD_HOUR_SUCCESS,
+      payload: { id },
+    });
+  } catch (error) {
+    toast.error(error.response.data.error);
+    dispatch({
+      type: Types.HANDLE_ADD_HOUR_FAILURE,
+    });
+  }
+};
+
+export { getSchedule, getTimesheet, getAvailableHours, deleteHour, addHour };
