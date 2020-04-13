@@ -69,6 +69,19 @@ This project was developed with the following technologies:
 	   <td><img alt="GoBarber" src="./.github/05.png" width="200px" /></td>
 	   <td><img alt="GoBarber" src="./.github/061.png" width="200px" /></td>
 	 </tr>
+    <tr>
+	   <td><img alt="GoBarber" src="./.github/062.png" width="200px" /></td>
+	   <td><img alt="GoBarber" src="./.github/063.png" width="200px" /></td>
+	   <td><img alt="GoBarber" src="./.github/064.png" width="200px" /></td>
+	 </tr>
+    <tr>
+	   <td><img alt="GoBarber" src="./.github/065.png" width="200px" /></td>
+	   <td><img alt="GoBarber" src="./.github/066.png" width="200px" /></td>
+	   <td><img alt="GoBarber" src="./.github/067.png" width="200px" /></td>
+	 </tr>
+    <tr>
+	   <td><img alt="GoBarber" src="./.github/068.png" width="200px" /></td>
+	 </tr>
   </tbody>
 </table>
 
