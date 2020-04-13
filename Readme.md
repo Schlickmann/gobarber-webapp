@@ -60,14 +60,14 @@ This project was developed with the following technologies:
 <table>
   <tbody>
 	 <tr>
-	   <td><img alt="GoBarber Sign In" src="./.github/01.PNG" width="200px" /></td>
-	   <td><img alt="GoBarber Sign Up" src="./.github/02.PNG" width="200px" /></td>
-	   <td><img alt="GoBarber" src="./.github/03.PNG" width="200px" /></td>
+	   <td><img alt="GoBarber Sign In" src="./.github/01.png" width="200px" /></td>
+	   <td><img alt="GoBarber Sign Up" src="./.github/02.png" width="200px" /></td>
+	   <td><img alt="GoBarber" src="./.github/03.png" width="200px" /></td>
 	 </tr>
 	  <tr>
-	   <td><img alt="GoBarber" src="./.github/04.PNG" width="200px" /></td>
-	   <td><img alt="GoBarber" src="./.github/05.PNG" width="200px" /></td>
-	   <td><img alt="GoBarber" src="./.github/061.PNG" width="200px" /></td>
+	   <td><img alt="GoBarber" src="./.github/04.png" width="200px" /></td>
+	   <td><img alt="GoBarber" src="./.github/05.png" width="200px" /></td>
+	   <td><img alt="GoBarber" src="./.github/061.png" width="200px" /></td>
 	 </tr>
   </tbody>
 </table>
